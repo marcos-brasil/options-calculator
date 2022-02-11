@@ -11,3 +11,4 @@
 .inputContainer {
   @apply flex flex-col justify-end items-end gap-2;
 }
+

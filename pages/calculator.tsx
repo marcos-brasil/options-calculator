@@ -10,6 +10,13 @@ export default function Calculator() {
 
   return (
     <div className="flex flex-col items-center h-full w-full">
+      <style jsx>{`
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+          opacity: 0;
+        }
+      `}</style>
+
       <h1 className="flex text-xl h-fit bg-red-100">Options Calculator</h1>
 
       <div className="flex flex-col items-center w-full h-full p-2 bg-yellow-100">
@@ -31,7 +38,7 @@ export default function Calculator() {
           </div>
 
           <div className={styles.inputContainer}>
-            <div>
+            {/* <div>
               <label htmlFor="asset-symbol" className="pr-2">
                 Assest Symbol
               </label>
@@ -41,7 +48,7 @@ export default function Calculator() {
                 id="asset-symbol"
                 className={styles.input}
               ></input>
-            </div>
+            </div> */}
             <div>
               <label htmlFor="asset-price" className="pr-2">
                 Assest Price
@@ -51,7 +58,7 @@ export default function Calculator() {
                 step=".01"
                 placeholder="Assest Price"
                 id="asset-price"
-                className="rounded-md px-2 bg-gray-200 outline-none placeholder-gray-400 text-sm h-[24px] w-[180px]"
+                className={styles.input}
               ></input>
             </div>
             <div>

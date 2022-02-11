@@ -12,7 +12,7 @@ export default function Switch({ id, legend, onChange, switchClass }: Props) {
   return (
     <>
       <label htmlFor={id} className={styles.toggle}>
-        <input name={id} id={id} type="checkbox" onChange={onChange}></input>
+        <input className="appearance-none" name={id} id={id} type="checkbox" onChange={onChange}></input>
         <span className={styles.slider}></span>
       </label>
       {legend}
