@@ -8,10 +8,13 @@ export default function NavBar() {
   let leftItem =
     router.asPath === "/about" ? (
       <Link href="/" scroll={false}>
-        <a className="pr-1 bg-slate-400">Calculator</a>
+        <a className="pr-1 bg-slate-400 text-3xl">⬅</a>
       </Link>
     ) : (
-      <div className="pr-1 bg-slate-400">Logo</div>
+      <div className="flex items-center bg-slate-400">
+        <span className="pl-1  text-2xl italic">Θ</span>
+        <span className="font-bold italic">ptions</span>
+      </div>
     );
 
   let rightItem =
