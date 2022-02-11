@@ -1,7 +1,12 @@
+import type { ChangeEvent } from "react";
 import { useState } from "react";
 import Switch from "../elements/Switch";
 
 import styles from "./calculator.module.css";
+
+function handleOnChangeInput(e: ChangeEvent<HTMLInputElement>) {
+  console.log([e.target.id], e.target.value);
+}
 
 export default function Calculator() {
   let [optionType, setOptionType] = useState("Call");
@@ -17,7 +22,7 @@ export default function Calculator() {
         }
       `}</style>
 
-      <h1 className="flex text-xl h-fit bg-red-100">Options Calculator</h1>
+      <h1 className="flex text-xl h-fit w-full justify-center">Options Calculator</h1>
 
       <div className="flex flex-col items-center w-full h-full p-2 bg-yellow-100">
         <form
@@ -57,8 +62,9 @@ export default function Calculator() {
                 type="number"
                 step=".01"
                 placeholder="Assest Price"
-                id="asset-price"
+                id="assetPrice"
                 className={styles.input}
+                onChange={handleOnChangeInput}
               ></input>
             </div>
             <div>
@@ -69,8 +75,9 @@ export default function Calculator() {
                 type="number"
                 step=".01"
                 placeholder="Options Price"
-                id="options-price"
+                id="optionsPrice"
                 className={styles.input}
+                onChange={handleOnChangeInput}
               ></input>
             </div>
             <div>
@@ -81,8 +88,9 @@ export default function Calculator() {
                 type="number"
                 step=".01"
                 placeholder="Strike Price"
-                id="strike-price"
+                id="strikePrice"
                 className={styles.input}
+                onChange={handleOnChangeInput}
               ></input>
             </div>
             <div>
@@ -93,58 +101,11 @@ export default function Calculator() {
                 type="number"
                 step=".01"
                 placeholder="Number of contracts"
-                id="number-of-contracts"
+                id="numberContracts"
                 className={styles.input}
+                onChange={handleOnChangeInput}
               ></input>
             </div>
-
-            {/* <div className="flex flex-col w-[170px] justify-end pr-2 gap-2 text-right">
-              <label htmlFor="options-price" className="">
-                Options Price
-              </label>
-              <label htmlFor="strike-price" className="">
-                Strike Price
-              </label>
-              <label htmlFor="number-of-contracts" className="">
-                Number of contracts
-              </label>
-            </div>
-            <div className="flex flex-col gap-2 w-[180px] pt-2 h-[24px] text-sm">
-              <input
-                type="text"
-                placeholder="Assest Symbol"
-                id="asset-symbol"
-                className="rounded-md px-2 bg-gray-200 outline-none placeholder-gray-400"
-              ></input>
-              <input
-                type="number"
-                step=".01"
-                placeholder="Assest Price"
-                id="asset-price"
-                className="rounded-md px-2 bg-gray-200 outline-none"
-              ></input>
-              <input
-                type="number"
-                step=".01"
-                placeholder="Options Price"
-                id="options-price"
-                className="rounded-md px-2 bg-gray-200 outline-none"
-              ></input>
-              <input
-                type="number"
-                step=".01"
-                placeholder="Strike Price"
-                id="strike-price"
-                className="rounded-md px-2 bg-gray-200 outline-none"
-              ></input>
-              <input
-                type="number"
-                step=".01"
-                placeholder="Number of contracts"
-                id="number-of-contracts"
-                className="rounded-md px-2 bg-gray-200 outline-none  focus:text-red-700"
-              ></input>
-            </div> */}
           </div>
 
           <div className="flex justify-end pt-10">

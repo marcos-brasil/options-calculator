@@ -6,6 +6,7 @@
   @apply rounded-md px-2 text-sm outline-none;
   @apply placeholder-gray-400 bg-gray-200;
   @apply h-[24px] w-[180px];
+  @apply focus:border focus:border-gray-400;
 }
 
 .inputContainer {
