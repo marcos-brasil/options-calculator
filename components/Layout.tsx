@@ -1,6 +1,10 @@
 import Head from "next/head";
 
-export default function Layout() {
+type Props = {
+  children: JSX.Element
+}
+
+export default function Layout({ children }: Props) {
   return (
     <>
       <Head>
@@ -12,12 +16,9 @@ export default function Layout() {
       <div className="flex flex-col items-center h-screen">
         <nav className="flex fixed items-center justify-between w-full h-10  md:max-w-5xl bg-slate-300">
           <div className="pl-1 bg-slate-400">Logo</div>
-          <div className="pr-1 bg-slate-400">help</div>
+          <div className="pr-1 bg-slate-400">About</div>
         </nav>
-        <div className="flex flex-col p-10 h-full w-full min-h-[1000px] md:max-w-3xl bg-blue-100">
-          <h1 className="flex text-xl h-fit bg-blue-400">Options Calculator</h1>
-          <div className="flex h-full bg-yellow-100">form</div>
-        </div>
+        {children}
         <div className="flex px-4 w-full md:max-w-3xl">
           <footer className="flex p-2  border-t-2 items-center w-full justify-center">
             <div className="flex mx-2 bg-blue-100 text-xs">
