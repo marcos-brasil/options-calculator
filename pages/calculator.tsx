@@ -24,7 +24,7 @@ export default function Calculator() {
               id={optionType}
               legend={legend}
               onChange={(e) => {
-                console.log(e);
+                console.log(e.target.value);
                 setOptionType(optionType === "Call" ? "Put" : "Call");
               }}
             />

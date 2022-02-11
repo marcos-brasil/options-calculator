@@ -1,11 +1,10 @@
 .switchText {
-  @apply pl-4 text-lg w-[50px];
+  @apply pl-2 text-lg w-[50px];
 }
 
-
 .input {
-  @apply rounded-md px-2 text-sm outline-none ;
-  @apply placeholder-gray-400 bg-gray-200  ;
+  @apply rounded-md px-2 text-sm outline-none;
+  @apply placeholder-gray-400 bg-gray-200;
   @apply h-[24px] w-[180px];
 }
 
