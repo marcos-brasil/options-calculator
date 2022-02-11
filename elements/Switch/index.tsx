@@ -9,7 +9,7 @@ type Props = {
 
 export default function Switch({ id, legend, onChange, switchClass }: Props) {
   return (
-    <label htmlFor={id} className="relative flex items-center h-fit text-xl">
+    <label htmlFor={id} className="relative flex items-center h-fit w-fit text-xl">
       <input
         id={id}
         onChange={onChange}
@@ -19,7 +19,7 @@ export default function Switch({ id, legend, onChange, switchClass }: Props) {
       <span
         className={
           switchClass ||
-          "w-12 h-7 flex items-center flex-shrink-0 p-1 bg-green-300 rounded-full duration-300 ease-in-out peer-checked:bg-red-300 after:w-6 after:h-6 after:bg-white after:rounded-full after:shadow-md after:duration-300 peer-checked:after:translate-x-4"
+          "w-11 h-6 flex items-center flex-shrink-0 p-1 bg-green-300 rounded-full duration-300 ease-in-out peer-checked:bg-red-300 after:w-5 after:h-5 after:bg-white after:rounded-full after:shadow-md after:duration-300 peer-checked:after:translate-x-4"
         }
       ></span>
       {legend}

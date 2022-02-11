@@ -1,27 +1,14 @@
-.textOptionType {
-  @apply pl-4 text-lg;
+.switchText {
+  @apply pl-4 text-lg w-[50px];
 }
 
-/* Use opacity to achieve the fade-in/out effect. */
-@keyframes fadeText {
-  0% {
-    opacity: 1;
-  }
-  25% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-  75% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
+
+.input {
+  @apply rounded-md px-2 text-sm outline-none ;
+  @apply placeholder-gray-400 bg-gray-200  ;
+  @apply h-[24px] w-[180px];
 }
 
-.textOptionTypeFade {
-  @apply textOptionType;
-  animation: fadeText 4s infinite;
+.inputContainer {
+  @apply flex flex-col justify-end items-end gap-2;
 }

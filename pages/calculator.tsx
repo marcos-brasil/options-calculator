@@ -6,7 +6,7 @@ import styles from "./calculator.module.css";
 export default function Calculator() {
   let [optionType, setOptionType] = useState("Call");
 
-  let legend = <div className={styles.textOptionType}>{optionType}</div>;
+  let legend = <div className={styles.switchText}>{optionType}</div>;
 
   return (
     <div className="flex flex-col items-center h-full w-full">
@@ -30,14 +30,68 @@ export default function Calculator() {
             />
           </div>
 
-          <div className="flex">
-            <div className="flex flex-col w-[170px] justify-end pr-2 gap-2 text-right">
-              <label htmlFor="asset-symbol" className="">
+          <div className={styles.inputContainer}>
+            <div>
+              <label htmlFor="asset-symbol" className="pr-2">
                 Assest Symbol
               </label>
-              <label htmlFor="asset-price" className="">
+              <input
+                type="text"
+                placeholder="Assest Symbol"
+                id="asset-symbol"
+                className={styles.input}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="asset-price" className="pr-2">
                 Assest Price
               </label>
+              <input
+                type="number"
+                step=".01"
+                placeholder="Assest Price"
+                id="asset-price"
+                className="rounded-md px-2 bg-gray-200 outline-none placeholder-gray-400 text-sm h-[24px] w-[180px]"
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="options-price" className="pr-2">
+                Option Price
+              </label>
+              <input
+                type="number"
+                step=".01"
+                placeholder="Options Price"
+                id="options-price"
+                className={styles.input}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="asset-price" className="pr-2">
+                Strike Price
+              </label>
+              <input
+                type="number"
+                step=".01"
+                placeholder="Strike Price"
+                id="strike-price"
+                className={styles.input}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="asset-price" className="pr-2">
+                Number of contracts
+              </label>
+              <input
+                type="number"
+                step=".01"
+                placeholder="Number of contracts"
+                id="number-of-contracts"
+                className={styles.input}
+              ></input>
+            </div>
+
+            {/* <div className="flex flex-col w-[170px] justify-end pr-2 gap-2 text-right">
               <label htmlFor="options-price" className="">
                 Options Price
               </label>
@@ -48,45 +102,52 @@ export default function Calculator() {
                 Number of contracts
               </label>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-[180px] pt-2 h-[24px] text-sm">
               <input
                 type="text"
                 placeholder="Assest Symbol"
                 id="asset-symbol"
-                className="bg-blue-100"
+                className="rounded-md px-2 bg-gray-200 outline-none placeholder-gray-400"
               ></input>
               <input
                 type="number"
                 step=".01"
                 placeholder="Assest Price"
                 id="asset-price"
-                className="bg-blue-100"
+                className="rounded-md px-2 bg-gray-200 outline-none"
               ></input>
               <input
                 type="number"
                 step=".01"
                 placeholder="Options Price"
                 id="options-price"
-                className="bg-blue-100"
+                className="rounded-md px-2 bg-gray-200 outline-none"
               ></input>
               <input
                 type="number"
                 step=".01"
                 placeholder="Strike Price"
                 id="strike-price"
-                className="bg-blue-100"
+                className="rounded-md px-2 bg-gray-200 outline-none"
               ></input>
               <input
                 type="number"
                 step=".01"
                 placeholder="Number of contracts"
                 id="number-of-contracts"
-                className="bg-blue-100"
+                className="rounded-md px-2 bg-gray-200 outline-none  focus:text-red-700"
               ></input>
-            </div>
+            </div> */}
           </div>
 
-          <button type="submit">Sign in</button>
+          <div className="flex justify-end pt-10">
+            <button
+              className=" rounded-full bg-gray-200 hover:bg-blue-200 px-4 py-1"
+              type="submit"
+            >
+              Calculate
+            </button>
+          </div>
         </form>
       </div>
     </div>
