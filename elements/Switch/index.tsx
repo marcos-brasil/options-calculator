@@ -1,15 +1,17 @@
 import type { ChangeEvent } from "react";
 
 type Props = {
+  id: string;
   legend: JSX.Element;
   onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
   switchClass?: string;
 };
 
-export default function Switch({ legend, onChange, switchClass }: Props) {
+export default function Switch({ id, legend, onChange, switchClass }: Props) {
   return (
-    <label className="relative flex items-center h-fit text-xl">
+    <label htmlFor={id} className="relative flex items-center h-fit text-xl">
       <input
+        id={id}
         onChange={onChange}
         type="checkbox"
         className="absolute left-1/2 -translate-x-1/2 w-full peer appearance-none rounded-md"

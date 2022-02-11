@@ -29,7 +29,7 @@ export default function NavBar() {
   // let rightItem =
   // router.asPath === "/about" ? <></> :
   return (
-    <nav className="flex fixed items-center justify-between w-full h-10 min-w-[350px] md:max-w-5xl bg-slate-300">
+    <nav className="px-4 sm:px-2 flex fixed items-center justify-between w-full h-10 min-w-[450px] md:max-w-5xl bg-slate-300">
       {leftItem}
       {rightItem}
     </nav>
