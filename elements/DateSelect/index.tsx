@@ -10,9 +10,9 @@ type Props = {
 
 export default function DateSelect({ placeholder, id, onChange }: Props) {
   let today = new Date();
-  let todayYear = today.getFullYear();
-  let todayMonth = today.getMonth() + 1;
-  let todayDay = today.getDate();
+  let [todayYear, setTodayYear] = useState(today.getFullYear());
+  let [todayMonth, setTodayMonth] = useState(today.getMonth() + 1);
+  let [todayDay, setTodayDay] = useState(today.getDate());
 
   let years = [];
   let months = [];
@@ -49,9 +49,9 @@ export default function DateSelect({ placeholder, id, onChange }: Props) {
               value={todayYear}
               className={styles.select}
               placeholder="year"
-              defaultValue={"month"}
+              // defaultValue={"month"}
               onChange={(e) => {
-                console.log(e.target.value);
+                setTodayYear(Number(e.target.value));
               }}
             >
               {years.map((y) => {
@@ -68,10 +68,9 @@ export default function DateSelect({ placeholder, id, onChange }: Props) {
             <select
               value={todayMonth}
               className={styles.select}
-              placeholder="year"
-              defaultValue={"month"}
+              placeholder="month"
               onChange={(e) => {
-                console.log(e.target.value);
+                setTodayMonth(Number(e.target.value));
               }}
             >
               {months.map((m) => (
@@ -86,10 +85,9 @@ export default function DateSelect({ placeholder, id, onChange }: Props) {
             <select
               value={todayDay}
               className={styles.select}
-              placeholder="year"
-              defaultValue={"month"}
+              placeholder="day"
               onChange={(e) => {
-                console.log(e.target.value);
+                setTodayDay(Number(e.target.value));
               }}
             >
               {days.map((d) => {
@@ -99,7 +97,6 @@ export default function DateSelect({ placeholder, id, onChange }: Props) {
                   </option>
                 );
               })}
-              {/* <option>01</option> */}
             </select>
           </div>
         </div>
