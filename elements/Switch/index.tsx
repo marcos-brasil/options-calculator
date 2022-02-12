@@ -4,23 +4,32 @@ import styles from "./index.module.css";
 
 type Props = {
   id: string;
+  animate?: boolean;
   legend: JSX.Element;
   onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
-  switchClass?: string;
+  shouldSwitch?: boolean;
 };
 
-export default function Switch({ id, legend, onChange, switchClass }: Props) {
+export default function Switch({
+  id,
+  animate,
+  legend,
+  onChange,
+  shouldSwitch,
+}: Props) {
   let r = useRef<HTMLLabelElement>() as MutableRefObject<HTMLLabelElement>;
 
+  animate = animate == null ? true : animate
+
   useEffect(() => {
-    //  whenever the satte is stored and user navigate should
-    // remenber values
-    //
-    // if (r.current) {
-    //   r.current.click()
-    //   console.log('******')
-    //  }
-  }, []);
+    if (shouldSwitch) {
+      if (r.current) {
+        r.current.click();
+      }
+    }
+
+    // r.current.click();
+  }, [shouldSwitch]);
 
   return (
     <>
@@ -32,7 +41,9 @@ export default function Switch({ id, legend, onChange, switchClass }: Props) {
           type="checkbox"
           onChange={onChange}
         ></input>
-        <span className={styles.slider}></span>
+        <span
+          className={animate ? styles.slider : styles.sliderNoAnimation}
+        ></span>
       </label>
       {legend}
     </>

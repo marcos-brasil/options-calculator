@@ -48,6 +48,8 @@ export default function Calculator() {
           <input className=" h-0 none"></input>
           <div className="flex justify-center pt-4 pb-8">
             <Switch
+              shouldSwitch={true}
+              // animate={false}
               id={optionType}
               legend={legend}
               onChange={(e) => {
