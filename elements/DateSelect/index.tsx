@@ -37,34 +37,13 @@ export default function DateSelect({
     `${selectedYear}-${fixedMonth}-${fixedDay}`
   );
 
-  console.log("-----@@@@", selectedMonth, selectedDay, inputValue);
 
   useEffect(() => {
     onChange(inputValue);
   }, [inputValue, onChange]);
-  // let [selectedYear, setSelectedYear] = useState(todayYear)
-  // let [selectedMonth, setSelectedMonth] = useState(todayMonth)
-  // let [selectedDay, setSelectedDay] = useState(todayDay)
 
-  let years = [];
-  let months = [];
-  let days = [];
 
-  for (
-    let idx = Number(selectedYear);
-    idx <= Number(selectedYear) + 10;
-    idx++
-  ) {
-    years.push(idx);
-  }
-
-  for (let idx = 1; idx <= 12; idx++) {
-    months.push(idx);
-  }
-
-  for (let idx = 1; idx <= 31; idx++) {
-    days.push(idx);
-  }
+  let [years, months, days] = createSelectDateOptions(selectedYear)
 
   let parentRef = useRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
 
@@ -100,6 +79,7 @@ export default function DateSelect({
               onChange={(e) => {
                 setSelectedYear(e.target.value);
                 (parentRef.current.children[0] as HTMLInputElement).focus();
+                (parentRef.current.children[0] as HTMLInputElement).blur();
               }}
             >
               {years.map((y) => {
@@ -127,6 +107,7 @@ export default function DateSelect({
 
                 setSelectedMonth(fixedMonth);
                 (parentRef.current.children[0] as HTMLInputElement).focus();
+                (parentRef.current.children[0] as HTMLInputElement).blur();
               }}
             >
               {months.map((m) => (
@@ -150,6 +131,7 @@ export default function DateSelect({
 
                 setSelectedDay(fixedDay);
                 (parentRef.current.children[0] as HTMLInputElement).focus();
+                (parentRef.current.children[0] as HTMLInputElement).blur();
               }}
             >
               {days
@@ -167,6 +149,30 @@ export default function DateSelect({
       </div>
     </>
   );
+}
+
+function createSelectDateOptions (year: string) {
+  let years = [];
+  let months = [];
+  let days = [];
+
+  for (
+    let idx = Number(year);
+    idx <= Number(year) + 10;
+    idx++
+  ) {
+    years.push(idx);
+  }
+
+  for (let idx = 1; idx <= 12; idx++) {
+    months.push(idx);
+  }
+
+  for (let idx = 1; idx <= 31; idx++) {
+    days.push(idx);
+  }
+
+  return [years, months, days]
 }
 
 function filterDaysCorrectly(year: string, month: string) {
