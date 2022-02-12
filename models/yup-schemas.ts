@@ -8,23 +8,13 @@ var dateReg = new RegExp(
 );
 
 export let option = yup.object().shape({
-  // expiration: yup
-  //   .date()
-  //   // .nullable()
-  //   .required()
-  //   .min(new Date())
-
-  //   .transform((value, originalValue) => {
-  //     console.log("++++", [value], [originalValue]);
-
-  //     return value;
-  //   }),
-  expiration: yup.string().transform((value, oriValue) => {
-    console.log('*******lll', [value], [oriValue])
-    return value
-  }).matches(dateReg, 'Not Valid Date'),
-  assetPrice: yup.number().required('Not a valid positive number').positive(),
-  optionsPrice: yup.number().required('Not a valid positive number').positive(),
-  strikePrice: yup.number().required('Not a valid positive number').positive(),
-  numberContracts: yup.number().required('Not a valid integer positive number').positive().integer(),
+  expiration: yup.string().matches(dateReg, "Not Valid Date"),
+  assetPrice: yup.number().required("Not a valid positive number").positive(),
+  optionsPrice: yup.number().required("Not a valid positive number").positive(),
+  strikePrice: yup.number().required("Not a valid positive number").positive(),
+  numberContracts: yup
+    .number()
+    .required("Not a valid integer positive number")
+    .positive()
+    .integer(),
 });
