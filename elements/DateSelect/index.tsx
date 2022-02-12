@@ -1,29 +1,52 @@
-import { useState } from "react";
-import type { ChangeEvent } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { ChangeEvent, MutableRefObject } from "react";
+import type { UseFormRegisterReturn } from "react-hook-form";
 import styles from "./index.module.css";
 
 type Props = {
-  month?: number
-  year? :number
-  day?: number
+  month?: number;
+  year?: number;
+  day?: number;
+  register?: UseFormRegisterReturn;
   placeholder: string;
   id: string;
-  onChange: (
-    evt: { year: number } | { month: number } | { day: number }
-  ) => void;
+  onChange: (evt: string) => void;
 };
 
-export default function DateSelect({ day, month, year, onChange }: Props) {
+export default function DateSelect({
+  day,
+  register,
+  month,
+  year,
+  onChange,
+}: Props) {
   let today = new Date();
-  let [todayYear, setTodayYear] = useState(today.getFullYear());
-  let [todayMonth, setTodayMonth] = useState(today.getMonth() + 1);
-  let [todayDay, setTodayDay] = useState(day || today.getDate());
+  let [selectedYear, setSelectedYear] = useState(String(today.getFullYear()));
+  let [selectedMonth, setSelectedMonth] = useState(String(today.getMonth() + 1));
+  let [selectedDay, setSelectedDay] = useState(String(day || today.getDate()));
+
+  let fixedMonth =
+    String(selectedMonth).length === 1 ? `0${selectedMonth}` : selectedMonth;
+
+  let fixeDay =
+    String(selectedDay).length === 1 ? `0${selectedDay}` : selectedDay;
+
+  let [inputValue, setInputValue] = useState(
+    `${selectedYear}-${fixedMonth}-${fixeDay}`
+  );
+
+  useEffect(() => {
+    onChange(inputValue);
+  }, [inputValue, onChange]);
+  // let [selectedYear, setSelectedYear] = useState(todayYear)
+  // let [selectedMonth, setSelectedMonth] = useState(todayMonth)
+  // let [selectedDay, setSelectedDay] = useState(todayDay)
 
   let years = [];
   let months = [];
   let days = [];
 
-  for (let idx = todayYear; idx <= todayYear + 10; idx++) {
+  for (let idx = Number(selectedYear); idx <= Number(selectedYear) + 10; idx++) {
     years.push(idx);
   }
 
@@ -35,11 +58,24 @@ export default function DateSelect({ day, month, year, onChange }: Props) {
     days.push(idx);
   }
 
-  // console.log('---------')
-  // console.log(years)
+  let parentRef = useRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
+
+  useEffect(() => {
+    let value = `${selectedYear}-${fixedMonth}-${fixeDay}`;
+    // input.value =
+
+    setInputValue(value);
+  }, [selectedDay, selectedMonth, selectedYear]);
 
   return (
     <>
+      <div ref={parentRef} className="fixed w-0 h-0">
+        <input
+          {...register}
+          className="fixed w-0 h-0"
+          value={inputValue}
+        ></input>
+      </div>
       <div className="flex flex-col">
         <div className="flex flex-col  xs:flex-row gap-2 ml-[92px] pb-1">
           <div className="flex w-fit h-fit pr-6">year</div>
@@ -47,18 +83,14 @@ export default function DateSelect({ day, month, year, onChange }: Props) {
           <div className="flex w-fit h-fit pr-0">day</div>
         </div>
         <div className="flex flex-col xs:flex-row">
-          <label className="flex pr-2">
-            Expiration
-          </label>
+          <label className="flex pr-2">Expiration</label>
           <div className="">
             <select
-              value={todayYear}
+              value={selectedYear}
               className={styles.select}
               placeholder="year"
-              // defaultValue={"month"}
               onChange={(e) => {
-                setTodayYear(Number(e.target.value));
-                onChange({ year: Number(e.target.value) });
+                setSelectedYear((e.target.value));
               }}
             >
               {years.map((y) => {
@@ -73,12 +105,16 @@ export default function DateSelect({ day, month, year, onChange }: Props) {
 
           <div className="flex justify-end pl-2 w-14">
             <select
-              value={todayMonth}
+              value={selectedMonth}
               className={styles.select}
               placeholder="month"
               onChange={(e) => {
-                setTodayMonth(Number(e.target.value));
-                onChange({ month: Number(e.target.value) });
+                let fixedMonth =
+                  e.target.value.length === 1
+                    ? `0${e.target.value}`
+                    : e.target.value;
+
+                setSelectedMonth(fixedMonth);
               }}
             >
               {months.map((m) => (
@@ -91,12 +127,19 @@ export default function DateSelect({ day, month, year, onChange }: Props) {
 
           <div className="flex justify-end w-14">
             <select
-              value={todayDay}
+              value={selectedDay}
               className={styles.select}
               placeholder="day"
               onChange={(e) => {
-                setTodayDay(Number(e.target.value));
-                onChange({ day: Number(e.target.value) });
+                let fixedDay =
+                  e.target.value.length === 1
+                    ? `0${e.target.value}`
+                    : e.target.value;
+
+
+
+                setSelectedDay(fixedDay);
+                (parentRef.current.children[0] as HTMLInputElement).focus();
               }}
             >
               {days.map((d) => {

@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import NavBar from "./Navbar";
 import Footer from "./Footer";
 
-import store from '../stores'
+import store from '../models'
 
 type Props = {
   children: JSX.Element;
