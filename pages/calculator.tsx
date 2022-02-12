@@ -42,10 +42,10 @@ export default function Calculator() {
     console.log("---!!!", data);
   };
 
-  let formsubmit = (e) => {
-    console.log(e);
-    return handleSubmit(onSubmit)(e);
-  };
+  // let formsubmit = (e) => {
+  //   console.log(e);
+  //   return handleSubmit(onSubmit)(e);
+  // };
 
   let registers = {
     expiration: register("expiration"),
@@ -167,6 +167,8 @@ export default function Calculator() {
                   
                   // console.log(placeholder, [e], [nextInput]);
                   if (submitButtonRef.current) {
+                    console.log('AAAAA', submitButtonRef.current)
+                    submitButtonRef.current.focus();
                     submitButtonRef.current.click();
                   }
 
@@ -180,7 +182,7 @@ export default function Calculator() {
           <div className=" flex justify-end pt-10 ">
             <button
               ref={submitButtonRef as MutableRefObject<HTMLButtonElement>}
-              className=" rounded-full bg-gray-200 hover:bg-blue-200 px-4 py-1"
+              className=" rounded-full bg-gray-200 hover:bg-blue-200 px-4 py-1 outline-0 "
               type="submit"
               // onClick={(e) => {
               // }}
