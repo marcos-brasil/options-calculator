@@ -23,8 +23,8 @@ export let option = yup.object().shape({
     console.log('*******lll', [value], [oriValue])
     return value
   }).matches(dateReg, 'Not Valid Date'),
-  assetPrice: yup.number().required().positive(),
-  optionsPrice: yup.number().required().positive(),
-  strikePrice: yup.number().required().positive(),
-  numberContracts: yup.number().required().positive().integer(),
+  assetPrice: yup.number().required('Not a valid positive number').positive(),
+  optionsPrice: yup.number().required('Not a valid positive number').positive(),
+  strikePrice: yup.number().required('Not a valid positive number').positive(),
+  numberContracts: yup.number().required('Not a valid integer positive number').positive().integer(),
 });

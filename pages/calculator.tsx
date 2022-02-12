@@ -42,7 +42,7 @@ export default function Calculator() {
   });
 
   // throw 'eee'
-  console.log("eeee", [errors.expiration]);
+  console.log("eeee", errors);
 
   let onSubmit = (data: any) => {
     console.log("---!!!", data);

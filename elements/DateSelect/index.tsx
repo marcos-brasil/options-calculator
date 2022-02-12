@@ -22,18 +22,22 @@ export default function DateSelect({
 }: Props) {
   let today = new Date();
   let [selectedYear, setSelectedYear] = useState(String(today.getFullYear()));
-  let [selectedMonth, setSelectedMonth] = useState(String(today.getMonth() + 1));
+  let [selectedMonth, setSelectedMonth] = useState(
+    String(today.getMonth() + 1)
+  );
   let [selectedDay, setSelectedDay] = useState(String(day || today.getDate()));
 
   let fixedMonth =
     String(selectedMonth).length === 1 ? `0${selectedMonth}` : selectedMonth;
 
-  let fixeDay =
+  let fixedDay =
     String(selectedDay).length === 1 ? `0${selectedDay}` : selectedDay;
 
   let [inputValue, setInputValue] = useState(
-    `${selectedYear}-${fixedMonth}-${fixeDay}`
+    `${selectedYear}-${fixedMonth}-${fixedDay}`
   );
+
+  console.log("-----@@@@", selectedMonth, selectedDay, inputValue);
 
   useEffect(() => {
     onChange(inputValue);
@@ -46,7 +50,11 @@ export default function DateSelect({
   let months = [];
   let days = [];
 
-  for (let idx = Number(selectedYear); idx <= Number(selectedYear) + 10; idx++) {
+  for (
+    let idx = Number(selectedYear);
+    idx <= Number(selectedYear) + 10;
+    idx++
+  ) {
     years.push(idx);
   }
 
@@ -61,11 +69,11 @@ export default function DateSelect({
   let parentRef = useRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
 
   useEffect(() => {
-    let value = `${selectedYear}-${fixedMonth}-${fixeDay}`;
+    let value = `${selectedYear}-${fixedMonth}-${fixedDay}`;
     // input.value =
 
     setInputValue(value);
-  }, [selectedDay, selectedMonth, selectedYear]);
+  }, [fixedDay, fixedMonth, selectedYear]);
 
   return (
     <>
@@ -86,11 +94,12 @@ export default function DateSelect({
           <label className="flex pr-2">Expiration</label>
           <div className="">
             <select
-              value={selectedYear}
+              value={Number(selectedYear)}
               className={styles.select}
               placeholder="year"
               onChange={(e) => {
-                setSelectedYear((e.target.value));
+                setSelectedYear(e.target.value);
+                (parentRef.current.children[0] as HTMLInputElement).focus();
               }}
             >
               {years.map((y) => {
@@ -105,7 +114,7 @@ export default function DateSelect({
 
           <div className="flex justify-end pl-2 w-14">
             <select
-              value={selectedMonth}
+              value={Number(selectedMonth)}
               className={styles.select}
               placeholder="month"
               onChange={(e) => {
@@ -114,7 +123,10 @@ export default function DateSelect({
                     ? `0${e.target.value}`
                     : e.target.value;
 
+                // console.log('=====', fixedMonth)
+
                 setSelectedMonth(fixedMonth);
+                (parentRef.current.children[0] as HTMLInputElement).focus();
               }}
             >
               {months.map((m) => (
@@ -127,7 +139,7 @@ export default function DateSelect({
 
           <div className="flex justify-end w-14">
             <select
-              value={selectedDay}
+              value={Number(selectedDay)}
               className={styles.select}
               placeholder="day"
               onChange={(e) => {
@@ -136,25 +148,47 @@ export default function DateSelect({
                     ? `0${e.target.value}`
                     : e.target.value;
 
-
-
                 setSelectedDay(fixedDay);
                 (parentRef.current.children[0] as HTMLInputElement).focus();
               }}
             >
-              {days.map((d) => {
-                return (
-                  <option value={d} key={d}>
-                    {d}
-                  </option>
-                );
-              })}
+              {days
+                .filter(filterDaysCorrectly(selectedYear, selectedMonth))
+                .map((d) => {
+                  return (
+                    <option value={d} key={d}>
+                      {d}
+                    </option>
+                  );
+                })}
             </select>
           </div>
         </div>
       </div>
     </>
   );
+}
+
+function filterDaysCorrectly(year: string, month: string) {
+  return (day: number): boolean => {
+    if (Number(month) % 2 === 0 && Number(month) !== 2 && day > 30) {
+      return false;
+    }
+
+    if (Number(month) % 2 === 1 && Number(month) !== 2) {
+      return true;
+    }
+
+    if (Number(year) % 4 !== 0 && Number(month) === 2 && day > 28) {
+      return false;
+    }
+
+    if (Number(year) % 4 === 0 && Number(month) === 2 && day > 29) {
+      return false;
+    }
+
+    return true;
+  };
 }
 
 // export function DateDropdown() {
