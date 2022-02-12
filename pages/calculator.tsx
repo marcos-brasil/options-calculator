@@ -69,13 +69,6 @@ export default function Calculator() {
                 className={styles.input}
               ></input>
             </div> */}
-            <Input
-              id="assetPrice"
-              placeholder="Assest Price"
-              onChange={(e) => {
-                console.log("-----", e.target.value);
-              }}
-            />
             <DateSelect
               id="expiration"
               placeholder="Expiration"
@@ -83,6 +76,14 @@ export default function Calculator() {
                 console.log("-----", e.target.value);
               }}
             />
+            <Input
+              id="assetPrice"
+              placeholder="Assest Price"
+              onChange={(e) => {
+                console.log("-----", e.target.value);
+              }}
+            />
+
             <Input
               id="optionsPrice"
               placeholder="Options Price"
