@@ -1,0 +1,8 @@
+.select {
+  /* arrow background */
+  background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICA8cG9seWdvbiBwb2ludHM9IjEyIDE3LjQxNCAzLjI5MyA4LjcwNyA0LjcwNyA3LjI5MyAxMiAxNC41ODYgMTkuMjkzIDcuMjkzIDIwLjcwNyA4LjcwNyAxMiAxNy40MTQiLz4KPC9zdmc+Cg==) no-repeat 95% 50%;
+  @apply bg-gray-200 outline-none px-2 pr-6 rounded-md appearance-none ;
+
+  @apply text-sm text-gray-600;
+
+}

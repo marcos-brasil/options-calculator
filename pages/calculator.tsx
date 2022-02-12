@@ -1,14 +1,23 @@
-import type { ChangeEvent } from "react";
-import { useState } from "react";
+import type { MutableRefObject, ChangeEvent } from "react";
+import { useState, useRef } from "react";
+
+import { useSelector } from "react-redux";
+
 import Switch from "../elements/Switch";
+import Input from "../elements/Input";
+import DateSelect from "../elements/DateSelect";
 
 import styles from "./calculator.module.css";
+
+import { useAppDispatch, useAppSelector } from "../stores";
 
 function handleOnChangeInput(e: ChangeEvent<HTMLInputElement>) {
   console.log([e.target.id], e.target.value);
 }
 
 export default function Calculator() {
+  let optionState = useAppSelector((state) => state.option);
+
   let [optionType, setOptionType] = useState("Call");
 
   let legend = <div className={styles.switchText}>{optionType}</div>;
@@ -20,24 +29,10 @@ export default function Calculator() {
 
   console.log(minDate, date.toLocaleDateString());
 
+  // throw 'eee'
+
   return (
     <div className="flex flex-col items-center h-full w-full">
-      <style jsx>{`
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-          opacity: 0;
-        }
-
-        
-
-        // input[type="date"] {
-        //   display:flex;
-        //   flex-direction: col;
-        //   display:-webkit-flex;
-        //   -webkit-flex: 1 0 0;
-        // }
-      `}</style>
-
       <h1 className="flex text-xl h-fit w-full justify-center">
         Options Calculator
       </h1>
@@ -50,6 +45,7 @@ export default function Calculator() {
             console.log("e", e);
           }}
         >
+          <input className=" h-0 none"></input>
           <div className="flex justify-center pt-4 pb-8">
             <Switch
               id={optionType}
@@ -73,77 +69,57 @@ export default function Calculator() {
                 className={styles.input}
               ></input>
             </div> */}
-            <div className="flex flex-col  xs:flex-row">
-              <label htmlFor="assetPrice" className="pr-2">
-                Assest Price
-              </label>
-              <input
-                type="number"
-                step=".01"
-                placeholder="Assest Price"
-                id="assetPrice"
-                className={styles.input}
-                onChange={handleOnChangeInput}
-              ></input>
-            </div>
-            <div className="flex flex-col xs:flex-row">
+            <Input
+              id="assetPrice"
+              placeholder="Assest Price"
+              onChange={(e) => {
+                console.log("-----", e.target.value);
+              }}
+            />
+            <DateSelect
+              id="expiration"
+              placeholder="Expiration"
+              onChange={(e) => {
+                console.log("-----", e.target.value);
+              }}
+            />
+            <Input
+              id="optionsPrice"
+              placeholder="Options Price"
+              onChange={(e) => {
+                console.log("-----", e.target.value);
+              }}
+            />
+            {/* <div className="flex flex-col xs:flex-row">
               <label htmlFor="expiration" className="pr-2">
                 Expiration
               </label>
-              <input
-                type="text"
-                // step=".01"
-                // placeholder="2022/15/07"
-                min={minDate}
-                max="2030-12-31"
-                placeholder="YYYY-MM-DD"
-                // title="FFFF"
-                id="expiration"
-                className={styles.input}
-                onFocus={(e) => e.target.type = 'date'}
-                onBlur={(e) => e.target.type = 'text'}
-                onChange={handleOnChangeInput}
-              ></input>
-            </div>
-            <div className="flex flex-col  xs:flex-row">
-              <label htmlFor="optionsPrice" className="pr-2">
-                Option Price
-              </label>
-              <input
-                type="number"
-                step=".01"
-                placeholder="Options Price"
-                id="optionsPrice"
-                className={styles.input}
-                onChange={handleOnChangeInput}
-              ></input>
-            </div>
-            <div className="flex flex-col xs:flex-row">
-              <label htmlFor="strikePrice" className="pr-2">
-                Strike Price
-              </label>
-              <input
-                type="number"
-                step=".01"
-                placeholder="Strike Price"
-                id="strikePrice"
-                className={styles.input}
-                onChange={handleOnChangeInput}
-              ></input>
-            </div>
-            <div className="flex flex-col  xs:flex-row">
-              <label htmlFor="numberContracts" className="pr-2">
-                Number of contracts
-              </label>
-              <input
-                type="number"
-                step=".01"
-                placeholder="Number of contracts"
-                id="numberContracts"
-                className={styles.input}
-                onChange={handleOnChangeInput}
-              ></input>
-            </div>
+              <select
+                className={styles.select}
+                placeholder="year"
+                defaultValue={"month"}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                }}
+              >
+                <option className="text-gray-600">2022</option>
+              </select>
+            </div> */}
+            <Input
+              id="strikePrice"
+              placeholder="Strike Price"
+              onChange={(e) => {
+                console.log("-----", e.target.value);
+              }}
+            />
+
+            <Input
+              id="numberContracts"
+              placeholder="Number of contracts"
+              onChange={(e) => {
+                console.log("-----", e.target.value);
+              }}
+            />
           </div>
 
           <div className=" flex justify-end pt-10 ">

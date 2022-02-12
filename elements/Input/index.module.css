@@ -1,7 +1,3 @@
-.switchText {
-  @apply pl-2 text-lg w-[50px];
-}
-
 .input {
   @apply rounded-md px-2 text-sm outline-none;
   @apply placeholder-gray-400 text-gray-600 bg-gray-200;
@@ -9,12 +5,10 @@
   @apply focus:border focus:border-gray-400;
 }
 
-.select {
-  @apply input
+.label {
+  @apply pr-2
 }
 
 .inputContainer {
-  @apply flex flex-col justify-end items-end gap-2;
+  @apply flex flex-col  xs:flex-row
 }
-
-
