@@ -3,16 +3,21 @@ import type { ChangeEvent } from "react";
 import styles from "./index.module.css";
 
 type Props = {
+  month?: number
+  year? :number
+  day?: number
   placeholder: string;
   id: string;
-  onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (
+    evt: { year: number } | { month: number } | { day: number }
+  ) => void;
 };
 
-export default function DateSelect({ placeholder, id, onChange }: Props) {
+export default function DateSelect({ day, month, year, onChange }: Props) {
   let today = new Date();
   let [todayYear, setTodayYear] = useState(today.getFullYear());
   let [todayMonth, setTodayMonth] = useState(today.getMonth() + 1);
-  let [todayDay, setTodayDay] = useState(today.getDate());
+  let [todayDay, setTodayDay] = useState(day || today.getDate());
 
   let years = [];
   let months = [];
@@ -30,6 +35,7 @@ export default function DateSelect({ placeholder, id, onChange }: Props) {
     days.push(idx);
   }
 
+  // console.log('---------')
   // console.log(years)
 
   return (
@@ -41,7 +47,7 @@ export default function DateSelect({ placeholder, id, onChange }: Props) {
           <div className="flex w-fit h-fit pr-0">day</div>
         </div>
         <div className="flex flex-col xs:flex-row">
-          <label htmlFor="expiration" className="flex pr-2">
+          <label className="flex pr-2">
             Expiration
           </label>
           <div className="">
@@ -52,6 +58,7 @@ export default function DateSelect({ placeholder, id, onChange }: Props) {
               // defaultValue={"month"}
               onChange={(e) => {
                 setTodayYear(Number(e.target.value));
+                onChange({ year: Number(e.target.value) });
               }}
             >
               {years.map((y) => {
@@ -71,6 +78,7 @@ export default function DateSelect({ placeholder, id, onChange }: Props) {
               placeholder="month"
               onChange={(e) => {
                 setTodayMonth(Number(e.target.value));
+                onChange({ month: Number(e.target.value) });
               }}
             >
               {months.map((m) => (
@@ -88,6 +96,7 @@ export default function DateSelect({ placeholder, id, onChange }: Props) {
               placeholder="day"
               onChange={(e) => {
                 setTodayDay(Number(e.target.value));
+                onChange({ day: Number(e.target.value) });
               }}
             >
               {days.map((d) => {

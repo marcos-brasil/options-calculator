@@ -72,9 +72,10 @@ export default function Calculator() {
             {/* <DateDropdown /> */}
             <DateSelect
               id="expiration"
+              day={undefined}
               placeholder="Expiration"
-              onChange={(e) => {
-                console.log("-----", e.target.value);
+              onChange={(val) => {
+                console.log("-----AAAA", val);
               }}
             />
             <Input
