@@ -4,9 +4,9 @@ import type { UseFormRegisterReturn } from "react-hook-form";
 import styles from "./index.module.css";
 
 type Props = {
-  month?: number;
-  year?: number;
-  day?: number;
+  month?: string;
+  year?: string;
+  day?: string;
   register?: UseFormRegisterReturn;
   placeholder: string;
   id: string;
@@ -21,10 +21,15 @@ export default function DateSelect({
   onChange,
 }: Props) {
   let today = new Date();
-  let [selectedYear, setSelectedYear] = useState(String(today.getFullYear()));
-  let [selectedMonth, setSelectedMonth] = useState(
-    String(today.getMonth() + 1)
+  
+  let [selectedYear, setSelectedYear] = useState(
+    year || String(today.getFullYear())
   );
+
+  let [selectedMonth, setSelectedMonth] = useState(
+    String(month || today.getMonth() + 1)
+  );
+
   let [selectedDay, setSelectedDay] = useState(String(day || today.getDate()));
 
   let fixedMonth =

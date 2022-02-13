@@ -39,7 +39,7 @@ export default function Calculator() {
     resolver: yupResolver(optionsSchema),
   });
 
-  // console.log('redux', optionState.kind)
+  console.log('redux', optionState.expiration)
   // console.log("redux", JSON.stringify(optionState, null, 2));
 
   let onSubmit = (data: any) => {
@@ -59,6 +59,8 @@ export default function Calculator() {
     useHTMLInput(registers);
 
   let submitButtonRef = useRef<HTMLButtonElement>();
+
+  let selectedDate = optionState.expiration.split('-') as [string, string, string]
 
   return (
     <div className="flex flex-col items-center h-full w-full">
@@ -89,7 +91,9 @@ export default function Calculator() {
             <DateSelect
               register={registers.expiration}
               id="expiration"
-              day={undefined}
+              year={selectedDate[0]}
+              month={selectedDate[1]}
+              day={selectedDate[2]}
               placeholder="Expiration"
               onChange={(val) => {
                 // console.log('******')
