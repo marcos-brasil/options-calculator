@@ -14,18 +14,34 @@ import DateSelect from "../elements/DateSelect";
 import styles from "./calculator.module.css";
 
 import { useAppDispatch, useAppSelector, optionsSchema } from "../models";
+import {
+  updateAssetPrice,
+  updateContracts,
+  updateExpiration,
+  updateKind,
+  updateOptionPrice,
+  updateStrikePrice,
+} from "../models/options";
 
 export default function Calculator() {
+  let dispatch = useAppDispatch();
+
   let optionState = useAppSelector((state) => state.option);
 
+  // console.log('++++', optionState)
+
   let [optionType, setOptionType] = useState("Call");
+
+  useEffect(() => {
+    dispatch(updateKind(optionType));
+  }, [dispatch, optionType]);
 
   let legend = <div className={styles.switchText}>{optionType}</div>;
 
   let date = new Date();
-  let minDate = `${date.getFullYear()}-${
-    date.getMonth() + 1
-  }-${date.getDate()}`;
+  // let minDate = `${date.getFullYear()}-${
+  //   date.getMonth() + 1
+  // }-${date.getDate()}`;
 
   // console.log(minDate, date.toLocaleDateString());
 
@@ -34,20 +50,18 @@ export default function Calculator() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    // mode: "onBlur",
+    mode: "onBlur",
     resolver: yupResolver(optionsSchema),
   });
 
+  console.log('erros', errors)
+
   let onSubmit = (data: any) => {
-    console.log("---!!!", data);
+    console.log("submit", data);
   };
 
-  // let formsubmit = (e) => {
-  //   console.log(e);
-  //   return handleSubmit(onSubmit)(e);
-  // };
-
   let registers = {
+    kind: register("kind"),
     expiration: register("expiration"),
     assetPrice: register("assetPrice"),
     optionsPrice: register("optionsPrice"),
@@ -62,7 +76,7 @@ export default function Calculator() {
 
   return (
     <div className="flex flex-col items-center h-full w-full">
-      <h1 className="flex text-xl h-fit w-full justify-center">
+      <h1 className="flex text-2xl h-fit w-full justify-center">
         Options Calculator
       </h1>
 
@@ -74,12 +88,14 @@ export default function Calculator() {
           <input className=" h-0 none"></input>
           <div className="flex justify-center pt-4 pb-8">
             <Switch
-              shouldSwitch={true}
+              register={registers.kind}
+              shouldSwitch={false}
               id={optionType}
               legend={legend}
               onChange={(e) => {
-                console.log(e.target.value);
-                setOptionType(optionType === "Call" ? "Put" : "Call");
+                let kind = optionType === "Call" ? "Put" : "Call";
+                dispatch(updateKind(kind));
+                setOptionType(kind);
               }}
             />
           </div>
@@ -91,23 +107,23 @@ export default function Calculator() {
               day={undefined}
               placeholder="Expiration"
               onChange={(val) => {
-                // console.log("-----AAAA", val);
+                dispatch(updateExpiration(val));
               }}
             />
             <Input
-              // nextInput={optionPriceEl}
               register={registers.assetPrice}
               id="assetPrice"
               placeholder="Assest Price"
               onChange={(e) => {
-                // console.log("-----", e.target.value);
+                let val = (e.target as HTMLInputElement).value;
+                dispatch(updateAssetPrice(val));
               }}
               onKeyPress={(e) => {
                 if (e.key === "Enter") {
-                  // console.log(placeholder, [e], [nextInput]);
                   if (optionPriceEl) {
                     optionPriceEl.focus();
                   }
+
                   e.preventDefault();
                   e.stopPropagation();
                 }
@@ -115,19 +131,19 @@ export default function Calculator() {
             />
 
             <Input
-              // nextInput={strikePriceEl}
               register={registers.optionsPrice}
               id="optionsPrice"
               placeholder="Options Price"
               onChange={(e) => {
-                // console.log("-----", e.target.value);
+                let val = (e.target as HTMLInputElement).value;
+                dispatch(updateOptionPrice(val));
               }}
               onKeyPress={(e) => {
                 if (e.key === "Enter") {
-                  // console.log(placeholder, [e], [nextInput]);
                   if (strikePriceEl) {
                     strikePriceEl.focus();
                   }
+
                   e.preventDefault();
                   e.stopPropagation();
                 }
@@ -135,19 +151,19 @@ export default function Calculator() {
             />
 
             <Input
-              // nextInput={numberContractsEl}
               register={registers.strikePrice}
               id="strikePrice"
               placeholder="Strike Price"
               onChange={(e) => {
-                // console.log("-----", e.target.value);
+                let val = (e.target as HTMLInputElement).value;
+                dispatch(updateStrikePrice(val));
               }}
               onKeyPress={(e) => {
                 if (e.key === "Enter") {
-                  // console.log(placeholder, [e], [nextInput]);
                   if (numberContractsEl) {
                     numberContractsEl.focus();
                   }
+
                   e.preventDefault();
                   e.stopPropagation();
                 }
@@ -155,19 +171,16 @@ export default function Calculator() {
             />
 
             <Input
-              // nextInput={submitBtnRef.current}
               register={registers.numberContracts}
               id="numberContracts"
               placeholder="Number of contracts"
               onChange={(e) => {
-                // console.log("-----", e.target.value);
+                let val = (e.target as HTMLInputElement).value;
+                dispatch(updateContracts(val));
               }}
               onKeyPress={(e) => {
                 if (e.key === "Enter") {
-                  
-                  // console.log(placeholder, [e], [nextInput]);
                   if (submitButtonRef.current) {
-                    console.log('AAAAA', submitButtonRef.current)
                     submitButtonRef.current.focus();
                     submitButtonRef.current.click();
                   }
@@ -212,27 +225,17 @@ function useHTMLInput(registers: Registers) {
   let strikePriceRef = registers.strikePrice.ref;
   let numberContractsRef = registers.numberContracts.ref;
 
-  // let submitBtnRef =
-  //   useRef<HTMLButtonElement>() as MutableRefObject<HTMLButtonElement>;
-  // // registers.assetPrice.ref = (el: HTMLInputElement) => {
-  // //   inputEl.assetPrice = el;
-  // //   return assetPriceRef(el);
-  // // };
-
   registers.optionsPrice.ref = (el: HTMLInputElement) => {
-    // inputEl.optionsPrice = el;
     setOptionPriceEl(el);
     return optionsPriceRef(el);
   };
 
   registers.strikePrice.ref = (el: HTMLInputElement) => {
-    // inputEl.strikePrice = el;
     setStrikePriceEl(el);
     return strikePriceRef(el);
   };
 
   registers.numberContracts.ref = (el: HTMLInputElement) => {
-    // inputEl.numberContracts = el;
     setNumberContractsPriceEl(el);
     return numberContractsRef(el);
   };

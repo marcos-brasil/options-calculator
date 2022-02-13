@@ -8,6 +8,7 @@ var dateReg = new RegExp(
 );
 
 export let option = yup.object().shape({
+  kind: yup.string().required('Must specify options kind'),
   expiration: yup.string().matches(dateReg, "Not Valid Date"),
   assetPrice: yup.number().required("Not a valid positive number").positive(),
   optionsPrice: yup.number().required("Not a valid positive number").positive(),

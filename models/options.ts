@@ -1,32 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 export const option = createSlice({
   name: "option",
   initialState: {
-    assetPrice: null,
-    expiration: null,
-    optionPrice: null,
-    strikePrice: null,
-    contracts: null,
-    kind: null,
+    assetPrice: "",
+    expiration: "",
+    optionPrice: "",
+    strikePrice: "",
+    contracts: "",
+    kind: "Call",
   },
   reducers: {
-    updateAssetPrice(state, { payload }) {
+    updateAssetPrice(state, { payload }: PayloadAction<string>) {
       state.assetPrice = payload;
     },
-    updateExpiration(state, { payload }) {
+    updateExpiration(state, { payload }: PayloadAction<string>) {
       state.expiration = payload;
     },
-    updateOptionPrice(state, { payload }) {
+    updateOptionPrice(state, { payload }: PayloadAction<string>) {
       state.optionPrice = payload;
     },
-    updateStrikePrice(state, { payload }) {
+    updateStrikePrice(state, { payload }: PayloadAction<string>) {
       state.strikePrice = payload;
     },
-    updateContracts(state, { payload }) {
+    updateContracts(state, { payload }: PayloadAction<string>) {
       state.contracts = payload;
     },
-    updateKind(state, { payload }) {
+    updateKind(state, { payload }: PayloadAction<string>) {
       state.kind = payload;
     },
   },

@@ -1,9 +1,12 @@
 import { useEffect, useRef } from "react";
 import type { ChangeEvent, MutableRefObject } from "react";
+import type { UseFormRegisterReturn } from "react-hook-form";
+
 import styles from "./index.module.css";
 
 type Props = {
   id: string;
+  register: UseFormRegisterReturn;
   animate?: boolean;
   legend: JSX.Element;
   onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
@@ -16,10 +19,11 @@ export default function Switch({
   legend,
   onChange,
   shouldSwitch,
+  register,
 }: Props) {
   let r = useRef<HTMLLabelElement>() as MutableRefObject<HTMLLabelElement>;
 
-  animate = animate == null ? true : animate
+  animate = animate == null ? true : animate;
 
   useEffect(() => {
     if (shouldSwitch) {
@@ -35,6 +39,7 @@ export default function Switch({
     <>
       <label ref={r} htmlFor={id} className={styles.toggle}>
         <input
+          {...register}
           className="appearance-none"
           name={id}
           id={id}

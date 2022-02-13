@@ -1,3 +1,6 @@
+.switchText {
+  @apply pl-2 text-lg w-[50px];
+}
 
 .toggle {
   @apply w-12 h-7 rounded-full relative z-10;

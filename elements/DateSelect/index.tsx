@@ -47,12 +47,12 @@ export default function DateSelect({
 
   let parentRef = useRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
 
-  useEffect(() => {
-    let value = `${selectedYear}-${fixedMonth}-${fixedDay}`;
-    // input.value =
+  // useEffect(() => {
+  //   let value = `${selectedYear}-${fixedMonth}-${fixedDay}`;
+  //   // input.value =
 
-    setInputValue(value);
-  }, [fixedDay, fixedMonth, selectedYear]);
+  //   setInputValue(value);
+  // }, [fixedDay, fixedMonth, selectedYear]);
 
   return (
     <>
