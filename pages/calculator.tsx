@@ -54,7 +54,7 @@ export default function Calculator() {
     resolver: yupResolver(optionsSchema),
   });
 
-  console.log('erros', errors)
+  console.log('redux', JSON.stringify(optionState, null, 2))
 
   let onSubmit = (data: any) => {
     console.log("submit", data);
@@ -101,12 +101,13 @@ export default function Calculator() {
           </div>
 
           <div className={styles.inputContainer}>
-            <DateSelect
+           <DateSelect
               register={registers.expiration}
               id="expiration"
               day={undefined}
               placeholder="Expiration"
               onChange={(val) => {
+                // console.log('******')
                 dispatch(updateExpiration(val));
               }}
             />
@@ -129,6 +130,7 @@ export default function Calculator() {
                 }
               }}
             />
+             {/* 
 
             <Input
               register={registers.optionsPrice}
@@ -189,7 +191,7 @@ export default function Calculator() {
                   e.stopPropagation();
                 }
               }}
-            />
+            /> */}
           </div>
 
           <div className=" flex justify-end pt-10 ">
