@@ -37,22 +37,20 @@ export default function DateSelect({
     `${selectedYear}-${fixedMonth}-${fixedDay}`
   );
 
-
   useEffect(() => {
     onChange(inputValue);
   }, [inputValue, onChange]);
 
-
-  let [years, months, days] = createSelectDateOptions(selectedYear)
+  let [years, months, days] = createSelectDateOptions(selectedYear);
 
   let parentRef = useRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
 
-  // useEffect(() => {
-  //   let value = `${selectedYear}-${fixedMonth}-${fixedDay}`;
-  //   // input.value =
+  useEffect(() => {
+    let value = `${selectedYear}-${fixedMonth}-${fixedDay}`;
+    // input.value =
 
-  //   setInputValue(value);
-  // }, [fixedDay, fixedMonth, selectedYear]);
+    setInputValue(value);
+  }, [fixedDay, fixedMonth, selectedYear]);
 
   return (
     <>
@@ -61,6 +59,7 @@ export default function DateSelect({
           {...register}
           className="fixed w-0 h-0"
           value={inputValue}
+          // checked={true}
         ></input>
       </div>
       <div className="flex flex-col">
@@ -151,16 +150,12 @@ export default function DateSelect({
   );
 }
 
-function createSelectDateOptions (year: string) {
+function createSelectDateOptions(year: string) {
   let years = [];
   let months = [];
   let days = [];
 
-  for (
-    let idx = Number(year);
-    idx <= Number(year) + 10;
-    idx++
-  ) {
+  for (let idx = Number(year); idx <= Number(year) + 10; idx++) {
     years.push(idx);
   }
 
@@ -172,7 +167,7 @@ function createSelectDateOptions (year: string) {
     days.push(idx);
   }
 
-  return [years, months, days]
+  return [years, months, days];
 }
 
 function filterDaysCorrectly(year: string, month: string) {

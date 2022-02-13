@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import type { ChangeEvent, MutableRefObject } from "react";
+import type { MouseEvent, MutableRefObject } from "react";
 import type { UseFormRegisterReturn } from "react-hook-form";
 
 import styles from "./index.module.css";
@@ -7,48 +7,41 @@ import styles from "./index.module.css";
 type Props = {
   id: string;
   register: UseFormRegisterReturn;
-  animate?: boolean;
+  isChecked: boolean;
   legend: JSX.Element;
-  onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
-  shouldSwitch?: boolean;
+  onClick: (evt: MouseEvent<HTMLInputElement, globalThis.MouseEvent>) => void;
 };
 
 export default function Switch({
   id,
-  animate,
   legend,
-  onChange,
-  shouldSwitch,
+  onClick,
   register,
+  isChecked,
 }: Props) {
   let r = useRef<HTMLLabelElement>() as MutableRefObject<HTMLLabelElement>;
 
-  animate = animate == null ? true : animate;
-
-  useEffect(() => {
-    if (shouldSwitch) {
-      if (r.current) {
-        r.current.click();
-      }
+  let inputRef = (el: HTMLInputElement) => {
+    if (el) {
+      el.checked = isChecked;
     }
 
-    // r.current.click();
-  }, [shouldSwitch]);
+    return register.ref(el);
+  };
 
   return (
     <>
       <label ref={r} htmlFor={id} className={styles.toggle}>
         <input
           {...register}
+          ref={inputRef}
           className="appearance-none"
           name={id}
           id={id}
           type="checkbox"
-          onChange={onChange}
+          onClick={onClick}
         ></input>
-        <span
-          className={animate ? styles.slider : styles.sliderNoAnimation}
-        ></span>
+        <span className={styles.slider}></span>
       </label>
       {legend}
     </>

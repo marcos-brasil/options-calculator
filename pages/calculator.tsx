@@ -30,13 +30,13 @@ export default function Calculator() {
 
   // console.log('++++', optionState)
 
-  let [optionType, setOptionType] = useState("Call");
+  let [optionType, setOptionType] = useState(optionState.kind);
 
   useEffect(() => {
     dispatch(updateKind(optionType));
   }, [dispatch, optionType]);
 
-  let legend = <div className={styles.switchText}>{optionType}</div>;
+  let legend = <div className={styles.switchText}>{optionState.kind}</div>;
 
   let date = new Date();
   // let minDate = `${date.getFullYear()}-${
@@ -54,7 +54,8 @@ export default function Calculator() {
     resolver: yupResolver(optionsSchema),
   });
 
-  console.log('redux', JSON.stringify(optionState, null, 2))
+  console.log('redux', optionState.kind)
+  // console.log("redux", JSON.stringify(optionState, null, 2));
 
   let onSubmit = (data: any) => {
     console.log("submit", data);
@@ -69,7 +70,7 @@ export default function Calculator() {
     numberContracts: register("numberContracts"),
   };
 
-  let { optionPriceEl, strikePriceEl, numberContractsEl } =
+  let { optionPriceEl, strikePriceEl, numberContractsEl, kindsEl } =
     useHTMLInput(registers);
 
   let submitButtonRef = useRef<HTMLButtonElement>();
@@ -90,18 +91,21 @@ export default function Calculator() {
             <Switch
               register={registers.kind}
               shouldSwitch={false}
+              isChecked={optionState.kind === 'Put'}
               id={optionType}
               legend={legend}
-              onChange={(e) => {
-                let kind = optionType === "Call" ? "Put" : "Call";
+              onClick={(e) => {
+                console.log('+++++++')
+                // console.log(kindsEl?.checked)
+                let kind = optionState.kind === "Call" ? "Put" : "Call";
                 dispatch(updateKind(kind));
-                setOptionType(kind);
+                // setOptionType(kind);
               }}
             />
           </div>
 
           <div className={styles.inputContainer}>
-           <DateSelect
+            <DateSelect
               register={registers.expiration}
               id="expiration"
               day={undefined}
@@ -130,7 +134,7 @@ export default function Calculator() {
                 }
               }}
             />
-             {/* 
+            {/* 
 
             <Input
               register={registers.optionsPrice}
@@ -215,6 +219,7 @@ type Registers = {
   optionsPrice: UseFormRegisterReturn;
   strikePrice: UseFormRegisterReturn;
   numberContracts: UseFormRegisterReturn;
+  kind: UseFormRegisterReturn;
 };
 
 function useHTMLInput(registers: Registers) {
@@ -223,9 +228,12 @@ function useHTMLInput(registers: Registers) {
   let [numberContractsEl, setNumberContractsPriceEl] =
     useState<HTMLInputElement>();
 
+  let [kindsEl, setKindsEl] = useState<HTMLInputElement>();
+
   let optionsPriceRef = registers.optionsPrice.ref;
   let strikePriceRef = registers.strikePrice.ref;
   let numberContractsRef = registers.numberContracts.ref;
+  let kindRef = registers.kind.ref;
 
   registers.optionsPrice.ref = (el: HTMLInputElement) => {
     setOptionPriceEl(el);
@@ -242,9 +250,15 @@ function useHTMLInput(registers: Registers) {
     return numberContractsRef(el);
   };
 
+  registers.kind.ref = (el: HTMLInputElement) => {
+    setKindsEl(el);
+    return kindRef(el);
+  };
+
   return {
     optionPriceEl,
     strikePriceEl,
     numberContractsEl,
+    kindsEl
   };
 }

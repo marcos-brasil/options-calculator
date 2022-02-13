@@ -8,7 +8,7 @@ type Props = {
   register: UseFormRegisterReturn;
   placeholder: string;
   id: string;
-  onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (evt: ChangeEvent<HTMLInputElement>) => void;
   onKeyPress?: (evt: KeyboardEvent<HTMLInputElement>) => void
 };
 
