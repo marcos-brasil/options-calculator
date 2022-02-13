@@ -8,7 +8,7 @@ export const option = createSlice({
     expiration: "",
     optionPrice: "",
     strikePrice: "",
-    contracts: "",
+    numberContracts: "",
     kind: "Call",
   },
   reducers: {
@@ -24,8 +24,8 @@ export const option = createSlice({
     updateStrikePrice(state, { payload }: PayloadAction<string>) {
       state.strikePrice = payload;
     },
-    updateContracts(state, { payload }: PayloadAction<string>) {
-      state.contracts = payload;
+    updateNumberContracts(state, { payload }: PayloadAction<string>) {
+      state.numberContracts = payload;
     },
     updateKind(state, { payload }: PayloadAction<string>) {
       state.kind = payload;
@@ -38,7 +38,7 @@ export let {
   updateExpiration,
   updateOptionPrice,
   updateStrikePrice,
-  updateContracts,
+  updateNumberContracts,
   updateKind,
 } = option.actions;
 

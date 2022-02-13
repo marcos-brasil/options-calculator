@@ -6,10 +6,11 @@ import type { UseFormRegisterReturn } from "react-hook-form";
 type Props = {
   // nextInput?: HTMLInputElement;
   register: UseFormRegisterReturn;
+  value: string;
   placeholder: string;
   id: string;
   onChange?: (evt: ChangeEvent<HTMLInputElement>) => void;
-  onKeyPress?: (evt: KeyboardEvent<HTMLInputElement>) => void
+  onKeyPress?: (evt: KeyboardEvent<HTMLInputElement>) => void;
 };
 
 export default function Input({
@@ -18,6 +19,7 @@ export default function Input({
   id,
   onChange,
   register,
+  value,
 }: Props) {
   return (
     <div className={styles.inputContainer}>
@@ -28,22 +30,13 @@ export default function Input({
         {...register}
         autoComplete="off"
         type="text"
+        value={value}
         // step=".01"
         placeholder={placeholder}
         id={id}
         className={styles.input}
         onChange={onChange}
         onKeyPress={onKeyPress}
-        // onKeyPress={(e) => {
-        //   if (e.key === "Enter") {
-        //     // console.log(placeholder, [e], [nextInput]);
-        //     if (nextInput) {
-        //       nextInput.focus();
-        //     }
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        //   }
-        // }}
       ></input>
     </div>
   );

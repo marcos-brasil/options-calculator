@@ -16,7 +16,7 @@ import styles from "./calculator.module.css";
 import { useAppDispatch, useAppSelector, optionsSchema } from "../models";
 import {
   updateAssetPrice,
-  updateContracts,
+  updateNumberContracts,
   updateExpiration,
   updateKind,
   updateOptionPrice,
@@ -29,7 +29,6 @@ export default function Calculator() {
   let optionState = useAppSelector((state) => state.option);
 
   let legend = <div className={styles.switchText}>{optionState.kind}</div>;
-
 
   const {
     register,
@@ -51,7 +50,7 @@ export default function Calculator() {
     kind: register("kind"),
     expiration: register("expiration"),
     assetPrice: register("assetPrice"),
-    optionsPrice: register("optionsPrice"),
+    optionPrice: register("optionPrice"),
     strikePrice: register("strikePrice"),
     numberContracts: register("numberContracts"),
   };
@@ -76,7 +75,7 @@ export default function Calculator() {
           <div className="flex justify-center pt-4 pb-8">
             <Switch
               register={registers.kind}
-              isChecked={optionState.kind === 'Put'}
+              isChecked={optionState.kind === "Put"}
               id={optionState.kind}
               legend={legend}
               onClick={(e) => {
@@ -98,6 +97,7 @@ export default function Calculator() {
               }}
             />
             <Input
+              value={optionState.assetPrice}
               register={registers.assetPrice}
               id="assetPrice"
               placeholder="Assest Price"
@@ -117,8 +117,9 @@ export default function Calculator() {
               }}
             />
             <Input
-              register={registers.optionsPrice}
-              id="optionsPrice"
+              value={optionState.optionPrice}
+              register={registers.optionPrice}
+              id="optionPrice"
               placeholder="Options Price"
               onChange={(e) => {
                 let val = (e.target as HTMLInputElement).value;
@@ -137,6 +138,7 @@ export default function Calculator() {
             />
 
             <Input
+              value={optionState.strikePrice}
               register={registers.strikePrice}
               id="strikePrice"
               placeholder="Strike Price"
@@ -157,12 +159,13 @@ export default function Calculator() {
             />
 
             <Input
+              value={optionState.numberContracts}
               register={registers.numberContracts}
               id="numberContracts"
               placeholder="Number of contracts"
               onChange={(e) => {
                 let val = (e.target as HTMLInputElement).value;
-                dispatch(updateContracts(val));
+                dispatch(updateNumberContracts(val));
               }}
               onKeyPress={(e) => {
                 if (e.key === "Enter") {
@@ -175,7 +178,7 @@ export default function Calculator() {
                   e.stopPropagation();
                 }
               }}
-            /> 
+            />
           </div>
 
           <div className=" flex justify-end pt-10 ">
@@ -196,7 +199,7 @@ export default function Calculator() {
 }
 
 type Registers = {
-  optionsPrice: UseFormRegisterReturn;
+  optionPrice: UseFormRegisterReturn;
   strikePrice: UseFormRegisterReturn;
   numberContracts: UseFormRegisterReturn;
   kind: UseFormRegisterReturn;
@@ -210,14 +213,14 @@ function useHTMLInput(registers: Registers) {
 
   let [kindsEl, setKindsEl] = useState<HTMLInputElement>();
 
-  let optionsPriceRef = registers.optionsPrice.ref;
+  let optionPriceRef = registers.optionPrice.ref;
   let strikePriceRef = registers.strikePrice.ref;
   let numberContractsRef = registers.numberContracts.ref;
   let kindRef = registers.kind.ref;
 
-  registers.optionsPrice.ref = (el: HTMLInputElement) => {
+  registers.optionPrice.ref = (el: HTMLInputElement) => {
     setOptionPriceEl(el);
-    return optionsPriceRef(el);
+    return optionPriceRef(el);
   };
 
   registers.strikePrice.ref = (el: HTMLInputElement) => {
@@ -239,6 +242,6 @@ function useHTMLInput(registers: Registers) {
     optionPriceEl,
     strikePriceEl,
     numberContractsEl,
-    kindsEl
+    kindsEl,
   };
 }
