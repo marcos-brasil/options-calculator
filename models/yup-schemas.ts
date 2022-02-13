@@ -11,7 +11,7 @@ export let option = yup.object().shape({
   kind: yup.string().required('Must specify options kind'),
   expiration: yup.string().matches(dateReg, "Not Valid Date"),
   assetPrice: yup.number().required("Not a valid positive number").positive(),
-  optionsPrice: yup.number().required("Not a valid positive number").positive(),
+  optionPrice: yup.number().required("Not a valid positive number").positive(),
   strikePrice: yup.number().required("Not a valid positive number").positive(),
   numberContracts: yup
     .number()

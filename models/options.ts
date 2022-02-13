@@ -1,14 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
+let todayEpoch = Date.now();
+let twoWeeks = 1000 * 60 * 60 * 24 * 14;
+
+let expirationDate = new Date(todayEpoch + twoWeeks);
+
+
 export const option = createSlice({
   name: "option",
   initialState: {
-    assetPrice: "",
-    expiration: "",
-    optionPrice: "",
-    strikePrice: "",
-    numberContracts: "",
+    assetPrice: "100",
+    expiration: `${expirationDate.getFullYear()}-${
+      expirationDate.getMonth() + 1
+    }-${expirationDate.getDate()}`,
+    optionPrice: "1.50",
+    strikePrice: "110",
+    numberContracts: "1",
     kind: "Call",
   },
   reducers: {

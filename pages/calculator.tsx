@@ -23,6 +23,17 @@ import {
   updateStrikePrice,
 } from "../models/options";
 
+// type Form
+
+async function postForm (
+  url: string,
+  opt: RequestInit
+) : Promise<unknown>{
+  return fetch(url, opt).then(
+    res => res.json() as Promise<unknown>
+  );
+}
+
 export default function Calculator() {
   let dispatch = useAppDispatch();
 
@@ -39,11 +50,21 @@ export default function Calculator() {
     resolver: yupResolver(optionsSchema),
   });
 
-  console.log('redux', optionState.expiration)
-  // console.log("redux", JSON.stringify(optionState, null, 2));
+  console.log('errors', errors)
 
-  let onSubmit = (data: any) => {
-    console.log("submit", data);
+  // console.log('redux', optionState.expiration)
+
+  let onSubmit = async () => {
+    // console.log("submit", data);
+    let res = await postForm('/api/calculator',  {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(optionState),
+    })
+
+    console.log(res)
   };
 
   let registers = {
@@ -60,7 +81,7 @@ export default function Calculator() {
 
   let submitButtonRef = useRef<HTMLButtonElement>();
 
-  let selectedDate = optionState.expiration.split('-') as [string, string, string]
+  let expirationDate = optionState.expiration.split('-') as [string, string, string]
 
   return (
     <div className="flex flex-col items-center h-full w-full">
@@ -91,9 +112,9 @@ export default function Calculator() {
             <DateSelect
               register={registers.expiration}
               id="expiration"
-              year={selectedDate[0]}
-              month={selectedDate[1]}
-              day={selectedDate[2]}
+              year={expirationDate[0]}
+              month={expirationDate[1]}
+              day={expirationDate[2]}
               placeholder="Expiration"
               onChange={(val) => {
                 // console.log('******')
