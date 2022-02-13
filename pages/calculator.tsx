@@ -28,22 +28,8 @@ export default function Calculator() {
 
   let optionState = useAppSelector((state) => state.option);
 
-  // console.log('++++', optionState)
-
-  let [optionType, setOptionType] = useState(optionState.kind);
-
-  useEffect(() => {
-    dispatch(updateKind(optionType));
-  }, [dispatch, optionType]);
-
   let legend = <div className={styles.switchText}>{optionState.kind}</div>;
 
-  let date = new Date();
-  // let minDate = `${date.getFullYear()}-${
-  //   date.getMonth() + 1
-  // }-${date.getDate()}`;
-
-  // console.log(minDate, date.toLocaleDateString());
 
   const {
     register,
@@ -54,7 +40,7 @@ export default function Calculator() {
     resolver: yupResolver(optionsSchema),
   });
 
-  console.log('redux', optionState.kind)
+  // console.log('redux', optionState.kind)
   // console.log("redux", JSON.stringify(optionState, null, 2));
 
   let onSubmit = (data: any) => {
@@ -90,16 +76,12 @@ export default function Calculator() {
           <div className="flex justify-center pt-4 pb-8">
             <Switch
               register={registers.kind}
-              shouldSwitch={false}
               isChecked={optionState.kind === 'Put'}
-              id={optionType}
+              id={optionState.kind}
               legend={legend}
               onClick={(e) => {
-                console.log('+++++++')
-                // console.log(kindsEl?.checked)
                 let kind = optionState.kind === "Call" ? "Put" : "Call";
                 dispatch(updateKind(kind));
-                // setOptionType(kind);
               }}
             />
           </div>
@@ -134,8 +116,6 @@ export default function Calculator() {
                 }
               }}
             />
-            {/* 
-
             <Input
               register={registers.optionsPrice}
               id="optionsPrice"
@@ -195,7 +175,7 @@ export default function Calculator() {
                   e.stopPropagation();
                 }
               }}
-            /> */}
+            /> 
           </div>
 
           <div className=" flex justify-end pt-10 ">
