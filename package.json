@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "dev-test": "jest --watch",
+    "dev-test": "jest --clearCache && jest --watch",
     "build-rust": "cargo-cp-artifact -nc pages/api/index.node -- cargo build --message-format=json-render-diagnostics"
   },
   "dependencies": {

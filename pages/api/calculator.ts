@@ -6,7 +6,7 @@ import {
   dividendEuropeanOption,
   futuresEuropeanOption,
   simpleEuropeanOption,
-} from "../../lib/european-black-scholes";
+} from "../../lib/european-options/options-formulas";
 
 // let a = require('./index.node')
 // // @ts-ignore
