@@ -67,6 +67,12 @@ export default function Calculator() {
     console.log(res)
   };
 
+  setTimeout(() => {
+    onSubmit()
+  }, 1000)
+
+  // 
+
   let registers = {
     kind: register("kind"),
     expiration: register("expiration"),
