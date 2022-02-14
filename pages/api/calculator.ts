@@ -9,12 +9,118 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  // console.log(req.body);
   res.status(200).json({ name: "John Doe" });
 }
 
-console.log("call", gBlackScholes("call", 60, 65, 0.25, 0.08, 0.3, 0.08));
-console.log("put", gBlackScholes("put", 100, 95, 0.5, 0.1, 0.2, 0.1-0.05));
+console.log(
+  "call simple",
+  roundNumber(simpleEuropeanOption("call", 60, 65, 0.25, 0.08, 0.3))
+);
+console.log(
+  "put dividend",
+  roundNumber(dividendEuropeanOption("put", 100, 95, 0.5, 0.1, 0.2, 0.05))
+);
+console.log(
+  "call future",
+  roundNumber(futuresEuropeanOption("call", 19, 19, 0.75, 0.1, 0.28))
+);
+console.log(
+  "put future",
+  roundNumber(futuresEuropeanOption("put", 19, 19, 0.75, 0.1, 0.28))
+);
+console.log(
+  "call currency",
+  roundNumber(currencyEuropeanOption("call", 1.56, 1.6, 0.5, 0.06, 0.12, 0.08))
+);
+
+function roundNumber(n: number) {
+  return Number(n.toFixed(4));
+}
+
+function simpleEuropeanOption(
+  callPutflag: "call" | "put",
+  price: number,
+  strike: number,
+  time: number,
+  rate: number,
+  volatility: number
+) {
+  // for a simple options the carry is equal to the
+  // interest rate rate
+  return gBlackScholes(
+    callPutflag,
+    price,
+    strike,
+    time,
+    rate,
+    volatility,
+    rate
+  );
+}
+
+function dividendEuropeanOption(
+  callPutflag: "call" | "put",
+  price: number,
+  strike: number,
+  time: number,
+  rate: number,
+  volatility: number,
+  dividend: number
+) {
+  // for dividend paying stock/index the carry is the difference
+  // of the interest rate and the anualized dividend
+  return gBlackScholes(
+    callPutflag,
+    price,
+    strike,
+    time,
+    rate,
+    volatility,
+    rate - dividend
+  );
+}
+
+function futuresEuropeanOption(
+  callPutflag: "call" | "put",
+  exchangeRate: number,
+  strike: number,
+  time: number,
+  rate: number,
+  volatility: number
+) {
+  // for options on futures the carry is set to 0
+  return gBlackScholes(
+    callPutflag,
+    exchangeRate,
+    strike,
+    time,
+    rate,
+    volatility,
+    0
+  );
+}
+
+function currencyEuropeanOption(
+  callPutflag: "call" | "put",
+  price: number,
+  strike: number,
+  time: number,
+  rate: number,
+  volatility: number,
+  foreignRate: number
+) {
+  // for dividend paying stock/index the carry is the difference
+  // of the interest rate and the anualized dividend
+  return gBlackScholes(
+    callPutflag,
+    price,
+    strike,
+    time,
+    rate,
+    volatility,
+    rate - foreignRate
+  );
+}
 
 // based on GBlackScholes from the
 // book The Complete Guide to Options Pricing Formulas
@@ -34,7 +140,6 @@ function gBlackScholes(
 
   let d2 = d1 - volatility * Math.sqrt(time);
 
-  console.log("[[[[", Math.E ** ((carry - rate) * time));
   if (callPutflag === "call") {
     return (
       price * Math.E ** ((carry - rate) * time) * cnd(d1) -
@@ -45,7 +150,7 @@ function gBlackScholes(
   // put
   return (
     strike * Math.E ** (-rate * time) * cnd(-d2) -
-    price * (Math.E ** ((carry - rate) * time)) * cnd(-d1)
+    price * Math.E ** ((carry - rate) * time) * cnd(-d1)
   );
 }
 
