@@ -6,7 +6,6 @@ let twoWeeks = 1000 * 60 * 60 * 24 * 14;
 
 let expirationDate = new Date(todayEpoch + twoWeeks);
 
-
 export const option = createSlice({
   name: "option",
   initialState: {
@@ -18,6 +17,7 @@ export const option = createSlice({
     strikePrice: "110",
     numberContracts: "1",
     kind: "Call",
+    interestRate: "0.01",
   },
   reducers: {
     updateAssetPrice(state, { payload }: PayloadAction<string>) {
@@ -38,6 +38,9 @@ export const option = createSlice({
     updateKind(state, { payload }: PayloadAction<string>) {
       state.kind = payload;
     },
+    updateInterestRate(state, { payload }: PayloadAction<string>) {
+      state.interestRate = payload;
+    },
   },
 });
 
@@ -48,6 +51,7 @@ export let {
   updateStrikePrice,
   updateNumberContracts,
   updateKind,
+  updateInterestRate,
 } = option.actions;
 
 export default option.reducer;

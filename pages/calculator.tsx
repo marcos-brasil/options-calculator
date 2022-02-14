@@ -21,17 +21,13 @@ import {
   updateKind,
   updateOptionPrice,
   updateStrikePrice,
+  updateInterestRate
 } from "../models/options";
 
 // type Form
 
-async function postForm (
-  url: string,
-  opt: RequestInit
-) : Promise<unknown>{
-  return fetch(url, opt).then(
-    res => res.json() as Promise<unknown>
-  );
+async function postForm(url: string, opt: RequestInit): Promise<unknown> {
+  return fetch(url, opt).then((res) => res.json() as Promise<unknown>);
 }
 
 export default function Calculator() {
@@ -50,28 +46,28 @@ export default function Calculator() {
     resolver: yupResolver(optionsSchema),
   });
 
-  console.log('errors', errors)
+  console.log("errors", errors);
 
   // console.log('redux', optionState.expiration)
 
   let onSubmit = async () => {
     // console.log("submit", data);
-    let res = await postForm('/api/calculator',  {
-      method: 'POST',
+    let res = await postForm("/api/calculator", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(optionState),
-    })
+    });
 
-    console.log(res)
+    console.log(res);
   };
 
-  setTimeout(() => {
-    onSubmit()
-  }, 1000)
+  // setTimeout(() => {
+  //   onSubmit();
+  // }, 1000);
 
-  // 
+  //
 
   let registers = {
     kind: register("kind"),
@@ -80,14 +76,21 @@ export default function Calculator() {
     optionPrice: register("optionPrice"),
     strikePrice: register("strikePrice"),
     numberContracts: register("numberContracts"),
+    interestRate: register("interestRate"),
   };
 
-  let { optionPriceEl, strikePriceEl, numberContractsEl, kindsEl } =
+  let { optionPriceEl, strikePriceEl, numberContractsEl, interestRateEl } =
     useHTMLInput(registers);
 
   let submitButtonRef = useRef<HTMLButtonElement>();
 
-  let expirationDate = optionState.expiration.split('-') as [string, string, string]
+  let expirationDate = optionState.expiration.split("-") as [
+    string,
+    string,
+    string
+  ];
+
+  let formSubmit = handleSubmit(onSubmit)
 
   return (
     <div className="flex flex-col items-center h-full w-full">
@@ -98,7 +101,7 @@ export default function Calculator() {
       <div className="flex flex-col items-center w-full h-full p-2 bg-yellow-100">
         <form
           className="flex flex-col w-full items-center"
-          onSubmit={handleSubmit(onSubmit)}
+          // onSubmit={}
         >
           <input className=" h-0 none"></input>
           <div className="flex justify-center pt-4 pb-8">
@@ -200,9 +203,34 @@ export default function Calculator() {
               }}
               onKeyPress={(e) => {
                 if (e.key === "Enter") {
+
+                  if (interestRateEl) {
+                    interestRateEl.focus();
+                  }
+
+            
+
+                  e.preventDefault();
+                  e.stopPropagation();
+                }
+              }}
+            />
+            <Input
+              value={optionState.interestRate}
+              register={registers.interestRate}
+              id="interestRate"
+              placeholder="Interest Rate"
+              onChange={(e) => {
+                let val = (e.target as HTMLInputElement).value;
+                dispatch(updateInterestRate(val));
+              }}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
                   if (submitButtonRef.current) {
                     submitButtonRef.current.focus();
                     submitButtonRef.current.click();
+                    submitButtonRef.current.blur();
+
                   }
 
                   e.preventDefault();
@@ -216,9 +244,8 @@ export default function Calculator() {
             <button
               ref={submitButtonRef as MutableRefObject<HTMLButtonElement>}
               className=" rounded-full bg-gray-200 hover:bg-blue-200 px-4 py-1 outline-0 "
-              type="submit"
-              // onClick={(e) => {
-              // }}
+              // type="submit"
+              onClick={formSubmit}
             >
               Calculate
             </button>
@@ -234,6 +261,7 @@ type Registers = {
   strikePrice: UseFormRegisterReturn;
   numberContracts: UseFormRegisterReturn;
   kind: UseFormRegisterReturn;
+  interestRate: UseFormRegisterReturn;
 };
 
 function useHTMLInput(registers: Registers) {
@@ -243,11 +271,13 @@ function useHTMLInput(registers: Registers) {
     useState<HTMLInputElement>();
 
   let [kindsEl, setKindsEl] = useState<HTMLInputElement>();
+  let [interestRateEl, setInterestRateEl] = useState<HTMLInputElement>();
 
   let optionPriceRef = registers.optionPrice.ref;
   let strikePriceRef = registers.strikePrice.ref;
   let numberContractsRef = registers.numberContracts.ref;
   let kindRef = registers.kind.ref;
+  let interestRate = registers.interestRate.ref;
 
   registers.optionPrice.ref = (el: HTMLInputElement) => {
     setOptionPriceEl(el);
@@ -269,10 +299,16 @@ function useHTMLInput(registers: Registers) {
     return kindRef(el);
   };
 
+  registers.interestRate.ref = (el: HTMLInputElement) => {
+    setInterestRateEl(el);
+    return interestRate(el);
+  };
+
   return {
     optionPriceEl,
     strikePriceEl,
     numberContractsEl,
     kindsEl,
+    interestRateEl,
   };
 }
