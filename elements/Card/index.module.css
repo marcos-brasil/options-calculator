@@ -1,0 +1,5 @@
+.container {
+  @apply flex flex-col items-center h-full w-full  rounded-lg;
+  @apply pt-10 shadow-2xl border border-gray-300  text-gray-700;
+  @apply pb-10;
+}
