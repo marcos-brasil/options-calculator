@@ -13,10 +13,10 @@ export let option = yup.object().shape({
   assetPrice: yup.number().required("Not a valid positive number").positive(),
   optionPrice: yup.number().required("Not a valid positive number").positive(),
   strikePrice: yup.number().required("Not a valid positive number").positive(),
-  numberContracts: yup
-    .number()
-    .required("Not a valid integer positive number")
-    .positive()
-    .integer(),
+  // numberContracts: yup
+  //   .number()
+  //   .required("Not a valid integer positive number")
+  //   .positive()
+  //   .integer(),
   interestRate: yup.number().required("Not a Valid Number"),
 });

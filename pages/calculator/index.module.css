@@ -1,20 +1,20 @@
+
+
 .switchText {
   @apply pl-2 text-lg w-[50px];
 }
 
-.input {
+/* .input {
   @apply rounded-md px-2 text-sm outline-none;
   @apply placeholder-gray-400 text-gray-600 bg-gray-200;
   @apply h-[24px] w-[180px] appearance-none;
   @apply focus:border focus:border-gray-400;
-}
+} */
 
-.select {
-  @apply input
-}
+/* .select {
+  @apply input;
+} */
 
 .inputContainer {
   @apply flex flex-col justify-end items-end gap-2;
 }
-
-

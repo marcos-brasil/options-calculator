@@ -15,6 +15,10 @@ import {
   updateInterestRate,
 } from "../../models/options";
 
+import {updateGreeks} from '../../models/options-greeks'
+
+import { OptionsGreek } from "../../lib/options-greek-types";
+
 import Switch from "../../elements/Switch";
 import Input from "../../elements/Input";
 import DateSelect from "../../elements/DateSelect";
@@ -22,16 +26,16 @@ import DateSelect from "../../elements/DateSelect";
 import styles from "./index.module.css";
 import { useHTMLInputs } from "./hooks";
 
-async function postForm(url: string, opt: RequestInit): Promise<unknown> {
-  return fetch(url, opt).then((res) => res.json() as Promise<unknown>);
+async function postForm<T>(url: string, opt: RequestInit): Promise<T> {
+  return fetch(url, opt).then((res) => res.json() as Promise<T>);
 }
+
 
 export default function FormFields() {
   let dispatch = useAppDispatch();
 
   let optionState = useAppSelector((state) => state.option);
 
-  let legend = <div className={styles.switchText}>{optionState.kind}</div>;
 
   const {
     register,
@@ -42,8 +46,10 @@ export default function FormFields() {
     resolver: yupResolver(optionsSchema),
   });
 
+  console.log("errors", errors);
+
   let onSubmit = async () => {
-    let res = await postForm("/api/calculator", {
+    let res = await postForm<OptionsGreek>("/api/calculator", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +57,7 @@ export default function FormFields() {
       body: JSON.stringify(optionState),
     });
 
-    console.log(res);
+    dispatch(updateGreeks(res))
   };
 
   let formRegisters = {
@@ -82,13 +88,15 @@ export default function FormFields() {
   }, []);
 
   return (
-    <form className="flex flex-col w-full items-center">
-      <div className="flex justify-center pt-4 pb-8">
+    <form className={styles.formContainer}>
+      <div className={styles.switchContainer}>
         <Switch
+          greeLegend="Call"
+          redLegend="Put"
           register={formRegisters.kind}
           isChecked={optionState.kind === "Put"}
           id={optionState.kind}
-          legend={legend}
+          // legend={legend}
           onClick={(e) => {
             let kind = optionState.kind === "Call" ? "Put" : "Call";
             dispatch(updateKind(kind));
@@ -185,6 +193,7 @@ export default function FormFields() {
               if (submitButtonRef.current) {
                 submitButtonRef.current.focus();
                 submitButtonRef.current.click();
+                submitButtonRef.current.blur();
               }
 
               e.preventDefault();
@@ -197,7 +206,7 @@ export default function FormFields() {
       <div className=" flex justify-end pt-10 ">
         <button
           ref={submitButtonRef as MutableRefObject<HTMLButtonElement>}
-          className=" rounded-full bg-gray-200 hover:bg-blue-200 px-4 py-1 outline-none "
+          className={styles.button}
           onClick={formSubmit}
         >
           Calculate

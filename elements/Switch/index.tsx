@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { MouseEvent, MutableRefObject } from "react";
 import type { UseFormRegisterReturn } from "react-hook-form";
 
@@ -8,18 +8,22 @@ type Props = {
   id: string;
   register: UseFormRegisterReturn;
   isChecked: boolean;
-  legend: JSX.Element;
+  greeLegend: string;
+  redLegend: string;
   onClick: (evt: MouseEvent<HTMLInputElement, globalThis.MouseEvent>) => void;
 };
 
 export default function Switch({
   id,
-  legend,
+  greeLegend,
+  redLegend,
   onClick,
   register,
   isChecked,
 }: Props) {
   let r = useRef<HTMLLabelElement>() as MutableRefObject<HTMLLabelElement>;
+
+  let [changeLegend, setChangeLegend] = useState(isChecked)
 
   let inputRef = (el: HTMLInputElement) => {
     if (el) {
@@ -28,6 +32,21 @@ export default function Switch({
 
     return register.ref(el);
   };
+
+  useEffect (() => {
+
+    if (isChecked === false) {
+      setTimeout(() => {
+        setChangeLegend(false)
+      }, 100)
+      return
+    }
+
+    setTimeout(() => {
+      setChangeLegend(true)
+    }, 100)
+
+  }, [isChecked])
 
   return (
     <>
@@ -43,7 +62,49 @@ export default function Switch({
         ></input>
         <span className={styles.slider}></span>
       </label>
-      {legend}
+      {/* <div
+          className={
+            isChecked
+              ? styles.switchTextVisible
+              : styles.switchTextVisibleTransparent
+          }
+        >
+          {redLegend}
+        </div> */}
+      {changeLegend ? (
+        <div
+          className={
+            isChecked
+              ? styles.switchTextVisible
+              : styles.switchTextVisibleTransparent
+          }
+        >
+          {redLegend}
+        </div>
+      ) : (
+        <div
+          className={
+            isChecked
+              ? styles.switchTextVisibleTransparent
+              : styles.switchTextVisible
+          }
+        >
+          {greeLegend}
+        </div>
+      )}
     </>
   );
 }
+
+// function useTextAnimation(delay: number, duration: number) {
+
+//   let initTime = Date.now()
+//   let animation = () => {
+
+//   }
+
+//   setTimeout(() => {
+//     initTime = Date.now()
+
+//   }, delay)
+// }

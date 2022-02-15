@@ -1,20 +1,17 @@
-.switchText {
-  @apply pl-2 text-lg w-[50px];
+.formContainer {
+  @apply flex flex-col w-full items-center;
 }
 
-.input {
-  @apply rounded-md px-2 text-sm outline-none;
-  @apply placeholder-gray-400 text-gray-600 bg-gray-200;
-  @apply h-[24px] w-[180px] appearance-none;
-  @apply focus:border focus:border-gray-400;
+.switchContainer {
+  @apply flex justify-center pt-4 pb-8;
 }
 
-.select {
-  @apply input
-}
 
 .inputContainer {
-  @apply flex flex-col justify-end items-end gap-2;
+  @apply flex flex-col justify-end items-end gap-3;
 }
 
-
+.button {
+  @apply rounded-full bg-stone-200 border border-stone-400;
+  @apply shadow-md hover:shadow-lg px-4 py-1 outline-none;
+}
