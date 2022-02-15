@@ -1,0 +1,14 @@
+.input {
+  @apply rounded-md px-2 text-sm outline-none;
+  @apply placeholder-gray-400 text-gray-600 bg-gray-200;
+  @apply h-[24px] w-[180px] appearance-none;
+  @apply focus:border focus:border-gray-400;
+}
+
+.label {
+  @apply pr-2
+}
+
+.inputContainer {
+  @apply flex flex-col  xs:flex-row
+}

@@ -1,28 +1,49 @@
-import type { ChangeEvent } from "react";
+import { useEffect, useRef } from "react";
+import type { MouseEvent, MutableRefObject } from "react";
+import type { UseFormRegisterReturn } from "react-hook-form";
+
+import styles from "./index.module.css";
 
 type Props = {
   id: string;
+  register: UseFormRegisterReturn;
+  isChecked: boolean;
   legend: JSX.Element;
-  onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
-  switchClass?: string;
+  onClick: (evt: MouseEvent<HTMLInputElement, globalThis.MouseEvent>) => void;
 };
 
-export default function Switch({ id, legend, onChange, switchClass }: Props) {
+export default function Switch({
+  id,
+  legend,
+  onClick,
+  register,
+  isChecked,
+}: Props) {
+  let r = useRef<HTMLLabelElement>() as MutableRefObject<HTMLLabelElement>;
+
+  let inputRef = (el: HTMLInputElement) => {
+    if (el) {
+      el.checked = isChecked;
+    }
+
+    return register.ref(el);
+  };
+
   return (
-    <label htmlFor={id} className="relative flex items-center h-fit text-xl">
-      <input
-        id={id}
-        onChange={onChange}
-        type="checkbox"
-        className="absolute left-1/2 -translate-x-1/2 w-full peer appearance-none rounded-md"
-      />
-      <span
-        className={
-          switchClass ||
-          "w-12 h-7 flex items-center flex-shrink-0 p-1 bg-green-300 rounded-full duration-300 ease-in-out peer-checked:bg-red-300 after:w-6 after:h-6 after:bg-white after:rounded-full after:shadow-md after:duration-300 peer-checked:after:translate-x-4"
-        }
-      ></span>
+    <>
+      <label ref={r} htmlFor={id} className={styles.toggle}>
+        <input
+          {...register}
+          ref={inputRef}
+          className="appearance-none"
+          name={id}
+          id={id}
+          type="checkbox"
+          onClick={onClick}
+        ></input>
+        <span className={styles.slider}></span>
+      </label>
       {legend}
-    </label>
+    </>
   );
 }
