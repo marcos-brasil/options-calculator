@@ -38,13 +38,13 @@ export default function Switch({
     if (isChecked === false) {
       setTimeout(() => {
         setChangeLegend(false)
-      }, 300)
+      }, 100)
       return
     }
 
     setTimeout(() => {
       setChangeLegend(true)
-    }, 300)
+    }, 100)
 
   }, [isChecked])
 
