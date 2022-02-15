@@ -1,0 +1,11 @@
+.container {
+  @apply flex px-4 w-full md:max-w-3xl
+}
+
+.footer {
+  @apply flex p-2 pb-8 border-t border-gray-400 items-center w-full justify-center;
+}
+
+.content {
+  @apply flex mx-2 text-gray-500 text-xs text-center
+}

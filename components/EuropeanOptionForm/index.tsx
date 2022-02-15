@@ -82,8 +82,8 @@ export default function FormFields() {
   }, []);
 
   return (
-    <form className="flex flex-col w-full items-center">
-      <div className="flex justify-center pt-4 pb-8">
+    <form className={styles.formContainer}>
+      <div className={styles.switchContainer}>
         <Switch
           register={formRegisters.kind}
           isChecked={optionState.kind === "Put"}

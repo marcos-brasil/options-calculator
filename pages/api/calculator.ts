@@ -61,28 +61,28 @@ export default function handler(
     4
   );
 
-  console.log(
-    "AAAAA",
-    kind,
-    Number(assetPrice),
-    Number(strikePrice),
-    time,
-    Number(interestRate),
-    Number(optionPrice)
-  );
+  // console.log(
+  //   "AAAAA",
+  //   kind,
+  //   Number(assetPrice),
+  //   Number(strikePrice),
+  //   time,
+  //   Number(interestRate),
+  //   Number(optionPrice)
+  // );
 
-  // console.log('PPP', expirationDate - today)
-  console.log(
-    "AAAAA",
-    simpleEuropeanOptionIV(
-      kind,
-      Number(assetPrice),
-      Number(strikePrice),
-      time,
-      Number(interestRate),
-      Number(optionPrice)
-    )
-  );
+  // // console.log('PPP', expirationDate - today)
+  // console.log(
+  //   "AAAAA",
+  //   simpleEuropeanOptionIV(
+  //     kind,
+  //     Number(assetPrice),
+  //     Number(strikePrice),
+  //     time,
+  //     Number(interestRate),
+  //     Number(optionPrice)
+  //   )
+  // );
   console.log("calculator api");
   res.status(200).json({ name: "John Doe" });
 }

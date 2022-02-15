@@ -1,0 +1,25 @@
+.container {
+  @apply px-4 sm:px-2 justify-center flex fixed;
+  @apply w-full h-10 bg-stone-200 shadow-md z-50;
+}
+
+.content {
+  @apply flex items-center min-w-[300px] w-full md:max-w-4xl; 
+  @apply justify-between;
+}
+
+.about {
+  @apply pr-1 
+}
+
+.logo{
+  @apply flex items-center italic font-bold;
+}
+
+.thetaLogo {
+  @apply pl-1 text-2xl font-normal
+}
+
+.arrowBack {
+  @apply w-7 h-7
+}
