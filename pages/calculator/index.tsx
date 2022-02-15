@@ -11,7 +11,7 @@ import styles from "./index.module.css";
 export default function Calculator() {
   return (
     <div className={styles.container}>
-      <h1 className="flex text-2xl h-fit w-full justify-center italic">
+      <h1 className="flex text-2xl h-fit w-full justify-center italic text-center">
         European Options Calculator
       </h1>
 

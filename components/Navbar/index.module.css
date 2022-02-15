@@ -9,11 +9,11 @@
 }
 
 .about {
-  @apply fixed xs:relative pr-3 right-2;
+  @apply fixed xs:relative pr-3 right-2 hidden xxs:flex;
 }
 
 .logo{
-  @apply flex items-center italic font-bold;
+  @apply fixed xs:relative left-2 pl-2 flex items-center italic font-bold;
 }
 
 .thetaLogo {
