@@ -1,0 +1,33 @@
+.container {
+  @apply flex shadow-lg flex-col min-w-fit h-[140px] pt-4 mb-4;
+}
+
+.titleContent {
+  @apply z-10 font-bold text-left pl-6 pb-1 bg-stone-200
+}
+
+.tableContainer {
+  @apply pl-4 pr-4  overflow-auto 
+}
+
+.leftLastCell {
+  @apply  border-gray-400
+}
+
+.leftCell {
+  @apply leftLastCell border-b
+}
+
+.leftText {
+  @apply pl-2 text-left w-14;
+}
+
+.rightLastCell {
+  @apply  w-fit border-b border-r border-gray-400  text-right pr-2
+}
+
+.rightCell {
+  @apply  rightLastCell border-b 
+}
+
+

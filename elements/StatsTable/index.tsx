@@ -1,3 +1,5 @@
+import styles from "./index.module.css";
+
 type Props = {
   title: string;
   data: Array<{ legend: string; value: string }>;
@@ -5,20 +7,31 @@ type Props = {
 
 export default function StatsTable({ title, data }: Props) {
   return (
-    <div className="flex  flex-col min-w-fit h-[140px] pt-4 mb-4">
-      <div className="z-10 font-bold text-left pl-6 h-ful bg-stone-200">
-        {title}
-      </div>
-      <div className="pl-4 pr-4  overflow-auto">
-        <table className=" w-full ">
-          <tbody className="">
+    <div className={styles.container}>
+      <div className={styles.titleContent}>{title}</div>
+      <div className={styles.tableContainer}>
+        <table>
+          <tbody>
             {data.map((item, idx) => {
               return (
-                <tr key={idx} className="border-b border-gray-400">
-                  <td className=" w-fit border-b border-r border-gray-400  text-right pr-2">
+                <tr
+                  key={idx}
+                  className={
+                    idx === data.length - 1
+                      ? styles.leftLastCell
+                      : styles.leftCell
+                  }
+                >
+                  <td
+                    className={
+                      idx === data.length - 1
+                        ? styles.rightLastCell
+                        : styles.rightCell
+                    }
+                  >
                     {item.legend}
                   </td>
-                  <td className="pl-2 text-left">{item.value}</td>
+                  <td className={styles.leftText}>{item.value}</td>
                 </tr>
               );
             })}

@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 import { OptionsGreek } from "../lib/options-greek-types";
 
-export const optionsGreeks = createSlice({
+export const optionGreeks = createSlice({
   name: "optionGreeks",
   initialState: {
     "Vanila Greeks": [
@@ -57,3 +57,8 @@ export const optionsGreeks = createSlice({
     },
   },
 });
+
+
+export let {updateGreeks} = optionGreeks.actions
+
+export default optionGreeks.reducer

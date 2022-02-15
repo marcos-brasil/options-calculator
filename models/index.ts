@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import type { TypedUseSelectorHook } from "react-redux";
 
 import optionReducer from "./options";
+import optionGreeksReducer from "./options-greeks";
 
 const store = configureStore({
   reducer: {
     option: optionReducer,
+    optionGreeks: optionGreeksReducer
   },
 });
 

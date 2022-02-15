@@ -5,10 +5,15 @@ import { useSelector } from "react-redux";
 
 import EuropeanFormFields from "../../components/EuropeanOptionForm";
 import StatsTable from "../../elements/StatsTable";
+import { useAppSelector } from "../../models";
 
 import styles from "./index.module.css";
 
 export default function Calculator() {
+  let optionsGreekState = useAppSelector((state) => state.optionGreeks);
+
+  let entries = Object.entries(optionsGreekState);
+
   return (
     <div className={styles.container}>
       <h1 className="flex text-2xl h-fit w-full justify-center italic text-center">
@@ -20,66 +25,9 @@ export default function Calculator() {
       <div className=" w-full h-full p-2 ">
         <EuropeanFormFields />
         <div className="flex  overflow-auto gap-6">
-          <StatsTable
-            title="Vanila Greeks"
-            data={[
-              { legend: "Implied Volatility", value: "20%" },
-              { legend: "deltay", value: "45" },
-              { legend: "gamma", value: "20" },
-              { legend: "theta", value: "4.6" },
-              { legend: "vega", value: "4" },
-            ]}
-          />
-          <StatsTable
-            title="Vanila Greeks"
-            data={[
-              { legend: "Implied Volatility", value: "20%" },
-              { legend: "deltay", value: "45" },
-              { legend: "gamma", value: "20" },
-              { legend: "theta", value: "4.6" },
-              { legend: "vega", value: "4" },
-            ]}
-          />
-          <StatsTable
-            title="Vanila Greeks"
-            data={[
-              { legend: "Implied Volatility", value: "20%" },
-              { legend: "deltay", value: "45" },
-              { legend: "gamma", value: "20" },
-              { legend: "theta", value: "4.6" },
-              { legend: "vega", value: "4" },
-            ]}
-          />
-          <StatsTable
-            title="Vanila Greeks"
-            data={[
-              { legend: "Implied Volatility", value: "20%" },
-              { legend: "deltay", value: "45" },
-              { legend: "gamma", value: "20" },
-              { legend: "theta", value: "4.6" },
-              { legend: "vega", value: "4" },
-            ]}
-          />
-          <StatsTable
-            title="Vanila Greeks"
-            data={[
-              { legend: "Implied Volatility", value: "20%" },
-              { legend: "deltay", value: "45" },
-              { legend: "gamma", value: "20" },
-              { legend: "theta", value: "4.6" },
-              { legend: "vega", value: "4" },
-            ]}
-          />
-                    <StatsTable
-            title="Vanila Greeks"
-            data={[
-              { legend: "Implied Volatility", value: "20%" },
-              { legend: "deltay", value: "45" },
-              { legend: "gamma", value: "20" },
-              { legend: "theta", value: "4.6" },
-              { legend: "vega", value: "4" },
-            ]}
-          />
+          {entries.map(([title, data], idx) => {
+            return <StatsTable key={idx} title={title} data={data} />;
+          })}
         </div>
       </div>
     </div>
