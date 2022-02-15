@@ -28,6 +28,7 @@ export default function Input({
       </label>
       <input
         {...register}
+        aria-label={placeholder}
         autoComplete="off"
         type="text"
         value={value}

@@ -11,5 +11,10 @@
 }
 
 .inputContainer {
-  @apply flex flex-col justify-end items-end gap-2;
+  @apply flex flex-col justify-end items-end gap-3;
+}
+
+.button {
+  @apply rounded-full bg-stone-200 border border-stone-400;
+  @apply shadow-md hover:shadow-lg px-4 py-1 outline-none;
 }

@@ -1,8 +1,8 @@
 .input {
   @apply rounded-md px-2 text-sm outline-none;
   @apply placeholder-gray-400 text-gray-600 bg-gray-100;
-  @apply h-[24px] w-[180px] appearance-none shadow-md;
-  @apply focus:border focus:border-gray-400;
+  @apply h-[24px] w-[194px] appearance-none shadow-md;
+  @apply focus:border focus:border-gray-400 h-[25px];
 }
 
 .label {

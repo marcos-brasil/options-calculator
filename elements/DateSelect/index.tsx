@@ -21,7 +21,7 @@ export default function DateSelect({
   onChange,
 }: Props) {
   let today = new Date();
-  
+
   let [selectedYear, setSelectedYear] = useState(
     year || String(today.getFullYear())
   );
@@ -62,6 +62,7 @@ export default function DateSelect({
       <div ref={parentRef} className="fixed w-0 h-0">
         <input
           {...register}
+          aria-label="expiration date"
           className="fixed w-0 h-0"
           value={inputValue}
           // checked={true}
@@ -73,7 +74,7 @@ export default function DateSelect({
           <div className="flex w-fit h-fit pr-3">month</div>
           <div className="flex w-fit h-fit pr-0">day</div>
         </div>
-        <div className="flex flex-col xs:flex-row">
+        <div className="flex flex-col xs:flex-row gap-2">
           <label className="flex pr-2">Expiration</label>
           <div className="">
             <select

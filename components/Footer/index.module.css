@@ -7,5 +7,5 @@
 }
 
 .content {
-  @apply flex mx-2 text-gray-500 text-xs text-center
+  @apply flex mx-2 text-gray-700 text-xs text-center
 }

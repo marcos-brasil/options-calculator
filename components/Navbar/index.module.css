@@ -1,11 +1,11 @@
 .container {
   @apply px-4 sm:px-2 justify-center flex fixed;
-  @apply w-full h-10 bg-stone-200 shadow-md z-50;
+  @apply w-full h-10 shadow-md z-50;
 }
 
 .content {
   @apply flex items-center min-w-[300px] w-full md:max-w-4xl; 
-  @apply justify-between;
+  @apply  sm:px-10 justify-between;
 }
 
 .about {

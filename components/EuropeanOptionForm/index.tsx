@@ -79,10 +79,10 @@ export default function FormFields() {
 
   let formSubmit = handleSubmit(onSubmit);
 
-  // useEffect(() => {
-  //   onSubmit();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  useEffect(() => {
+    onSubmit();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <form className={styles.formContainer}>
@@ -188,6 +188,7 @@ export default function FormFields() {
               if (submitButtonRef.current) {
                 submitButtonRef.current.focus();
                 submitButtonRef.current.click();
+                submitButtonRef.current.blur();
               }
 
               e.preventDefault();
@@ -200,7 +201,7 @@ export default function FormFields() {
       <div className=" flex justify-end pt-10 ">
         <button
           ref={submitButtonRef as MutableRefObject<HTMLButtonElement>}
-          className=" rounded-full bg-gray-200 hover:bg-blue-200 px-4 py-1 outline-none "
+          className={styles.button}
           onClick={formSubmit}
         >
           Calculate
