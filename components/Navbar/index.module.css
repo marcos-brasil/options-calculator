@@ -1,6 +1,6 @@
 .container {
   @apply px-4 sm:px-2 justify-center flex fixed;
-  @apply w-full h-10 shadow-md z-50;
+  @apply w-full h-10 shadow-md z-50 bg-zinc-200;
 }
 
 .content {

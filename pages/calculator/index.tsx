@@ -16,43 +16,48 @@ export default function Calculator() {
 
       <div className=" w-full h-full p-2 ">
         <EuropeanFormFields />
-        <div className="w-[220px] mt-4 pl-4 h-[140px] overflow-auto">
-          <table className="w-full border border-gray-400">
-            <caption className=" font-bold text-left pl-2">
+        <div className="flex  flex-col w-[220px] h-[140px] pt-4">
+          <div className="z-10 font-bold text-left pl-6 w-full h-ful bg-stone-200">Vanila Greeks</div>
+          <div className="pl-4  overflow-auto">
+            <table className="w-full  border border-gray-400">
+              {/* <caption className=" font-bold text-left pl-2">
               Vanila Greeks
-            </caption>
+            </caption> */}
 
-            <tbody className="border border-gray-400">
-              <tr className="border border-gray-400">
-                <td className="border border-gray-400 w-[50px] text-right pr-2">AA</td>
-                <td className="pl-2">BB</td>
-              </tr>
-              <tr>
-                <td>AA</td>
-              </tr>
-              <tr>
-                <td>AA</td>
-              </tr>
-              <tr>
-                <td>AA</td>
-              </tr>
-              <tr>
-                <td>AA</td>
-              </tr>
-              <tr>
-                <td>AA</td>
-              </tr>
-              <tr>
-                <td>AA</td>
-              </tr>
-              <tr>
-                <td>AA</td>
-              </tr>
-              <tr>
-                <td>AA</td>
-              </tr>
-            </tbody>
-          </table>
+              <tbody className="border border-gray-400">
+                <tr className="border border-gray-400">
+                  <td className="border border-gray-400 w-[50px] text-right pr-2">
+                    AA
+                  </td>
+                  <td className="pl-2">BB</td>
+                </tr>
+                <tr>
+                  <td>AA</td>
+                </tr>
+                <tr>
+                  <td>AA</td>
+                </tr>
+                <tr>
+                  <td>AA</td>
+                </tr>
+                <tr>
+                  <td>AA</td>
+                </tr>
+                <tr>
+                  <td>AA</td>
+                </tr>
+                <tr>
+                  <td>AA</td>
+                </tr>
+                <tr>
+                  <td>AA</td>
+                </tr>
+                <tr>
+                  <td>AA</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
