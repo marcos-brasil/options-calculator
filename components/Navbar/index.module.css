@@ -1,5 +1,5 @@
 .container {
-  @apply px-4 sm:px-2 justify-center flex fixed;
+  @apply px-4 sm:px-2 justify-center flex fixed min-w-[400px];
   @apply w-full h-10 shadow-md z-50 bg-zinc-200;
 }
 
@@ -9,7 +9,7 @@
 }
 
 .about {
-  @apply pr-1 
+  @apply fixed xs:relative pr-3 right-2;
 }
 
 .logo{

@@ -6,9 +6,6 @@
   @apply flex justify-center pt-4 pb-8;
 }
 
-.switchText {
-  @apply pl-2 text-lg w-[50px];
-}
 
 .inputContainer {
   @apply flex flex-col justify-end items-end gap-3;

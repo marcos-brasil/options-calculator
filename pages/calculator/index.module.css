@@ -1,3 +1,8 @@
+.container {
+  @apply flex flex-col items-center h-full w-full  rounded-lg;
+  @apply pt-10 shadow-2xl border border-gray-300  text-gray-700;
+}
+
 .switchText {
   @apply pl-2 text-lg w-[50px];
 }
@@ -9,12 +14,10 @@
   @apply focus:border focus:border-gray-400;
 } */
 
-.select {
-  @apply input
-}
+/* .select {
+  @apply input;
+} */
 
 .inputContainer {
   @apply flex flex-col justify-end items-end gap-2;
 }
-
-

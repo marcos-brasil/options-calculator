@@ -63,21 +63,22 @@ export default function DateSelect({
         <input
           {...register}
           aria-label="expiration date"
-          aria-hidden="true"
           className="fixed w-0 h-0"
           value={inputValue}
           // checked={true}
         ></input>
       </div>
-      <div className="flex flex-col">
-        <div className="flex flex-col  xs:flex-row gap-2 ml-[92px] pb-1">
-          <div className="flex w-fit h-fit pr-6">year</div>
-          <div className="flex w-fit h-fit pr-3">month</div>
-          <div className="flex w-fit h-fit pr-0">day</div>
+      <div className="flex xs:flex-col">
+        <div className=" absolute xs:relative ml-5 flex mt-4 xs:mt-0 xs:flex-row gap-2 xs:ml-[110px]  pb-1">
+          <div className="flex w-fit h-fit pr-8 text-sm">year</div>
+          <div className="flex w-fit h-fit pr-5 text-sm  xs:pr-6">month</div>
+          <div className="flex w-fit h-fit text-sm xs:pr-0">day</div>
         </div>
-        <div className="flex flex-col xs:flex-row gap-2">
-          <label className="flex pr-2">Expiration</label>
-          <div className="">
+        <div className="flex flex-row justify-center xs:flex-row gap-2 mt-10 xs:mt-0">
+          <div className="absolute flex mt-[-52px] xs:mt-1 xs:relative">
+            <label className="flex  pr-2">Expiration</label>
+          </div>
+          <div className="mt-1">
             <select
               value={Number(selectedYear)}
               className={styles.select}
@@ -98,7 +99,7 @@ export default function DateSelect({
             </select>
           </div>
 
-          <div className="flex justify-end pl-2 w-14">
+          <div className="flex justify-end pl-2 w-14 mt-1">
             <select
               value={Number(selectedMonth)}
               className={styles.select}
@@ -124,7 +125,7 @@ export default function DateSelect({
             </select>
           </div>
 
-          <div className="flex justify-end w-14">
+          <div className="flex justify-end w-14 mt-1">
             <select
               value={Number(selectedDay)}
               className={styles.select}

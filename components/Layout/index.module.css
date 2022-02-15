@@ -1,6 +1,6 @@
 .container {
   @apply flex flex-col items-center h-screen ;
-  @apply min-w-[300px] min-h-[900px] sm:min-h-[850px];
+  @apply min-w-[400px] min-h-[900px] sm:min-h-[850px];
 }
 
 .content {
