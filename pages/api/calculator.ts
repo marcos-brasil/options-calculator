@@ -68,6 +68,7 @@ export default function handler(
     Number(optionPrice)
   );
 
+
   res.status(200).json({
     "Vanila Greeks": [
       { legend: "Implied Volatility", value: (volatility * 100).toFixed(2) },

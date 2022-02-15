@@ -1,21 +1,21 @@
 .container {
-  @apply flex shadow-lg flex-col min-w-fit h-[140px] pt-4 mb-4;
+  @apply flex bg-stone-300 rounded-lg   flex-col min-w-fit pb-4 pt-4 ;
 }
 
 .titleContent {
-  @apply z-10 font-bold text-left pl-6 pb-1 bg-stone-200
+  @apply z-10 font-bold text-left pl-6 pb-1 bg-stone-300;
 }
 
 .tableContainer {
-  @apply pl-4 pr-4  overflow-auto 
+  @apply flex justify-center items-center pl-4 pr-4  overflow-auto;
 }
 
 .leftLastCell {
-  @apply  border-gray-400
+  @apply border-gray-400;
 }
 
 .leftCell {
-  @apply leftLastCell border-b
+  @apply leftLastCell border-b;
 }
 
 .leftText {
@@ -23,11 +23,9 @@
 }
 
 .rightLastCell {
-  @apply  w-fit border-b border-r border-gray-400  text-right pr-2
+  @apply w-fit border-r border-gray-400  text-right pr-2;
 }
 
 .rightCell {
-  @apply  rightLastCell border-b 
+  @apply rightLastCell border-b;
 }
-
-

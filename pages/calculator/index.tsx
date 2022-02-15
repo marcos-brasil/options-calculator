@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 
 import EuropeanFormFields from "../../components/EuropeanOptionForm";
+import Card from "../../elements/Card";
 import StatsTable from "../../elements/StatsTable";
 import { useAppSelector } from "../../models";
 
@@ -15,21 +16,21 @@ export default function Calculator() {
   let entries = Object.entries(optionsGreekState);
 
   return (
-    <div className={styles.container}>
-      <h1 className="flex text-2xl h-fit w-full justify-center italic text-center">
-        European Options Calculator
-      </h1>
+    <Card>
+        <h1 className="flex text-2xl h-fit w-full justify-center italic text-center">
+          European Options Calculator
+        </h1>
 
-      <div className="pt-4 w-5/6 border-b border-gray-400"></div>
+        <div className="pt-4 w-5/6 border-b border-gray-400"></div>
 
-      <div className=" w-full h-full p-2 ">
-        <EuropeanFormFields />
-        <div className="flex  overflow-auto gap-6">
-          {entries.map(([title, data], idx) => {
-            return <StatsTable key={idx} title={title} data={data} />;
-          })}
+        <div className=" w-full h-full p-2 ">
+          <EuropeanFormFields />
+          <div className="flex  overflow-auto gap-6 pt-6 mx-4">
+            {entries.map(([title, data], idx) => {
+              return <StatsTable key={idx} title={title} data={data} />;
+            })}
+          </div>
         </div>
-      </div>
-    </div>
+    </Card>
   );
 }

@@ -39,7 +39,7 @@ function LeftItem() {
   if (router.asPath === "/about") {
     return (
       <Link href="/" scroll={false}>
-        <a>
+        <a className={styles.logo}>
           <ArrowBack />
         </a>
       </Link>
