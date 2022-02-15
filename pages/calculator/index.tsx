@@ -19,16 +19,68 @@ export default function Calculator() {
 
       <div className=" w-full h-full p-2 ">
         <EuropeanFormFields />
-        <StatsTable
-          title="Vanila Greeks"
-          data={[
-            { legend: "Implied Volatility", value: "20%" },
-            { legend: "deltay", value: "45" },
-            { legend: "gamma", value: "20" },
-            { legend: "theta", value: "4.6" },
-            { legend: "vega", value: "4" },
-          ]}
-        />
+        <div className="flex  overflow-auto gap-2">
+          <StatsTable
+            title="Vanila Greeks"
+            data={[
+              { legend: "Implied Volatility", value: "20%" },
+              { legend: "deltay", value: "45" },
+              { legend: "gamma", value: "20" },
+              { legend: "theta", value: "4.6" },
+              { legend: "vega", value: "4" },
+            ]}
+          />
+          <StatsTable
+            title="Vanila Greeks"
+            data={[
+              { legend: "Implied Volatility", value: "20%" },
+              { legend: "deltay", value: "45" },
+              { legend: "gamma", value: "20" },
+              { legend: "theta", value: "4.6" },
+              { legend: "vega", value: "4" },
+            ]}
+          />
+          <StatsTable
+            title="Vanila Greeks"
+            data={[
+              { legend: "Implied Volatility", value: "20%" },
+              { legend: "deltay", value: "45" },
+              { legend: "gamma", value: "20" },
+              { legend: "theta", value: "4.6" },
+              { legend: "vega", value: "4" },
+            ]}
+          />
+          <StatsTable
+            title="Vanila Greeks"
+            data={[
+              { legend: "Implied Volatility", value: "20%" },
+              { legend: "deltay", value: "45" },
+              { legend: "gamma", value: "20" },
+              { legend: "theta", value: "4.6" },
+              { legend: "vega", value: "4" },
+            ]}
+          />
+          <StatsTable
+            title="Vanila Greeks"
+            data={[
+              { legend: "Implied Volatility", value: "20%" },
+              { legend: "deltay", value: "45" },
+              { legend: "gamma", value: "20" },
+              { legend: "theta", value: "4.6" },
+              { legend: "vega", value: "4" },
+            ]}
+          />
+                    <StatsTable
+            title="Vanila Greeks"
+            data={[
+              { legend: "Implied Volatility", value: "20%" },
+              { legend: "deltay", value: "45" },
+              { legend: "gamma", value: "20" },
+              { legend: "theta", value: "4.6" },
+              { legend: "vega", value: "4" },
+            ]}
+          />
+        </div>
       </div>
     </div>
   );

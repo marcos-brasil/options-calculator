@@ -5,8 +5,8 @@ type Props = {
 
 export default function StatsTable({ title, data }: Props) {
   return (
-    <div className="flex  flex-col w-fit h-[140px]  pt-4">
-      <div className="z-10 font-bold text-left pl-6 w-full h-ful bg-stone-200">
+    <div className="flex  flex-col  h-[140px] pt-4">
+      <div className="z-10 font-bold text-left pl-6 h-ful bg-stone-200">
         {title}
       </div>
       <div className="pl-4  overflow-auto">
