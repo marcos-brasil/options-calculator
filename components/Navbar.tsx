@@ -8,7 +8,7 @@ export default function NavBar() {
   // let rightItem =
   // router.asPath === "/about" ? <></> :
   return (
-    <nav className="px-4 sm:px-2 justify-center flex fixed  w-full h-10 bg-gray-300">
+    <nav className="px-4 sm:px-2 justify-center flex fixed  w-full h-10 bg-stone-200 shadow-md z-50">
       <div className="flex items-center min-w-[300px] w-full md:max-w-4xl justify-between">
         <LeftItem />
         <RightItem />
