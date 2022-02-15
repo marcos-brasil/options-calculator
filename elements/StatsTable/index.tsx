@@ -9,8 +9,8 @@ export default function StatsTable({ title, data }: Props) {
       <div className="z-10 font-bold text-left pl-6 h-ful bg-stone-200">
         {title}
       </div>
-      <div className="pl-4  overflow-auto">
-        <table className=" w-full   ">
+      <div className="pl-4 pr-4  overflow-auto">
+        <table className=" w-full ">
           <tbody className="">
             {data.map((item, idx) => {
               return (
