@@ -8,7 +8,7 @@ import { cnd } from "../distributions";
 
 // section 1.1.6
 export function generalBlackScholes(
-  callPutflag: "call" | "put",
+  callPutflag: "Call" | "Put",
   price: number,
   strike: number,
   time: number,
@@ -22,7 +22,7 @@ export function generalBlackScholes(
 
   let d2 = d1 - volatility * Math.sqrt(time);
 
-  if (callPutflag === "call") {
+  if (callPutflag === "Call") {
     return (
       price * Math.E ** ((carry - rate) * time) * cnd(d1) -
       strike * Math.E ** (-rate * time) * cnd(d2)
@@ -46,7 +46,7 @@ export function generalBlackScholes(
 //    and update the bound accordenly
 // - a precision has a default to 4 decimal places, but could be changed.
 export function generalBlackScholesIV(
-  callPutflag: "call" | "put",
+  callPutflag: "Call" | "Put",
   price: number,
   strike: number,
   time: number,
@@ -64,6 +64,7 @@ export function generalBlackScholesIV(
   while (true) {
     let vol = 2 ** idx / 1000;
     idx++;
+
 
     let guessPrice = generalBlackScholes(
       callPutflag,
@@ -89,10 +90,7 @@ export function generalBlackScholesIV(
   }
 
   while (true) {
-    let vol = roundNumber(
-      lowerBound + (upperBound - lowerBound) / 2,
-      precision
-    );
+    let vol = lowerBound + (upperBound - lowerBound) / 2;
 
     let guessPrice = generalBlackScholes(
       callPutflag,
@@ -104,7 +102,7 @@ export function generalBlackScholesIV(
       carry
     );
 
-    guessPrice = roundNumber(guessPrice, 4);
+    guessPrice = roundNumber(guessPrice, precision);
 
     if (guessPrice < optionPrice) {
       lowerBound = vol;
@@ -117,7 +115,7 @@ export function generalBlackScholesIV(
     }
 
     if (guessPrice === optionPrice) {
-      return vol;
+      return roundNumber(vol, precision);
     }
   }
 }

@@ -1,11 +1,13 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
+import { roundNumber } from "../../lib";
 
 import {
   currencyEuropeanOption,
   dividendEuropeanOption,
   futuresEuropeanOption,
   simpleEuropeanOption,
+  simpleEuropeanOptionIV,
 } from "../../lib/european-options/options-formulas";
 
 // let a = require('./index.node')
@@ -17,46 +19,100 @@ import {
 
 // })
 
+// 2022-02-14
+// https://www.epochconverter.com
+let epochYear = 31556926 * 1000;
+
+interface OptionsNextApiRequest extends NextApiRequest {
+  body: {
+    assetPrice: string;
+    expiration: string;
+    optionPrice: string;
+    strikePrice: string;
+    numberContracts: string;
+    kind: "Call" | "Put";
+    interestRate: string;
+  };
+}
+
 type Data = {
   name: string;
 };
 
 export default function handler(
-  req: NextApiRequest,
+  req: OptionsNextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  console.log(req.body);
+  let { kind, assetPrice, expiration, optionPrice, strikePrice, interestRate } =
+    req.body;
+
+  let expirationDate = new Date(expiration);
+
+  let today = new Date();
+  let todayYear = today.getFullYear();
+  let todayMonth = today.getMonth() + 1;
+  let todayDay = today.getDate();
+
+  today = new Date(`${todayYear}-${todayMonth}-${todayDay}`);
+
+  let time = roundNumber(
+    (expirationDate.getTime() - today.getTime()) / epochYear,
+    4
+  );
+
+  console.log(
+    "AAAAA",
+    kind,
+    Number(assetPrice),
+    Number(strikePrice),
+    time,
+    Number(interestRate),
+    Number(optionPrice)
+  );
+
+  // console.log('PPP', expirationDate - today)
+  console.log(
+    "AAAAA",
+    simpleEuropeanOptionIV(
+      kind,
+      Number(assetPrice),
+      Number(strikePrice),
+      time,
+      Number(interestRate),
+      Number(optionPrice)
+    )
+  );
   console.log("calculator api");
   res.status(200).json({ name: "John Doe" });
 }
 
-
-
 // simple tests based from example from the book
 
-console.log(
-  "call simple",
-  roundNumber(simpleEuropeanOption("call", 60, 65, 0.25, 0.08, 0.3))
-);
-console.log(
-  "put dividend",
-  roundNumber(dividendEuropeanOption("put", 100, 95, 0.5, 0.1, 0.2, 0.05))
-);
-console.log(
-  "call future",
-  roundNumber(futuresEuropeanOption("call", 19, 19, 0.75, 0.1, 0.28))
-);
-console.log(
-  "put future",
-  roundNumber(futuresEuropeanOption("put", 19, 19, 0.75, 0.1, 0.28))
-);
-console.log(
-  "call currency",
-  roundNumber(currencyEuropeanOption("call", 1.56, 1.6, 0.5, 0.06, 0.12, 0.08))
-);
+// console.log(
+//   "call simple",
+//   roundNumber(simpleEuropeanOption("call", 60, 65, 0.25, 0.08, 0.3))
+// );
+// console.log(
+//   "put dividend",
+//   roundNumber(dividendEuropeanOption("put", 100, 95, 0.5, 0.1, 0.2, 0.05))
+// );
+// console.log(
+//   "call future",
+//   roundNumber(futuresEuropeanOption("call", 19, 19, 0.75, 0.1, 0.28))
+// );
+// console.log(
+//   "put future",
+//   roundNumber(futuresEuropeanOption("put", 19, 19, 0.75, 0.1, 0.28))
+// );
+// console.log(
+//   "call currency",
+//   roundNumber(currencyEuropeanOption("call", 1.56, 1.6, 0.5, 0.06, 0.12, 0.08))
+// );
 
-function roundNumber(n: number) {
-  return Number(n.toFixed(4));
-}
+// function roundNumber(n: number) {
+//   return Number(n.toFixed(4));
+// }
 
 // function simpleEuropeanOption(
 //   callPutflag: "call" | "put",

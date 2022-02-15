@@ -16,14 +16,14 @@ import {
 describe("european options", () => {
   describe("compute prices of several options types", () => {
     test("vanila call option", () => {
-      let callPrice = simpleEuropeanOption("call", 60, 65, 0.25, 0.08, 0.3);
+      let callPrice = simpleEuropeanOption("Call", 60, 65, 0.25, 0.08, 0.3);
 
       expect(roundNumber(callPrice, 4)).toBe(2.1334);
     });
 
     test("dividend put option", () => {
       let putPrice = dividendEuropeanOption(
-        "put",
+        "Put",
         100,
         95,
         0.5,
@@ -36,20 +36,20 @@ describe("european options", () => {
     });
 
     test("futures call option", () => {
-      let putPrice = futuresEuropeanOption("call", 19, 19, 0.75, 0.1, 0.28);
+      let putPrice = futuresEuropeanOption("Call", 19, 19, 0.75, 0.1, 0.28);
 
       expect(roundNumber(putPrice, 4)).toBe(1.7011);
     });
 
     test("futures put option", () => {
-      let putPrice = futuresEuropeanOption("put", 19, 19, 0.75, 0.1, 0.28);
+      let putPrice = futuresEuropeanOption("Put", 19, 19, 0.75, 0.1, 0.28);
 
       expect(roundNumber(putPrice, 4)).toBe(1.7011);
     });
 
     test("currency call option", () => {
       let putPrice = currencyEuropeanOption(
-        "call",
+        "Call",
         1.56,
         1.6,
         0.5,
@@ -64,13 +64,13 @@ describe("european options", () => {
 
   describe("compute IV of several options types", () => {
     test("vanilla call option", () => {
-      let vol = simpleEuropeanOptionIV("call", 60, 65, 0.25, 0.08, 2.1334);
+      let vol = simpleEuropeanOptionIV("Call", 60, 65, 0.25, 0.08, 2.1334);
       expect(vol).toBe(0.3);
     });
 
     test("dividend put option", () => {
       let vol = dividendEuropeanOptionIV(
-        "put",
+        "Put",
         100,
         95,
         0.5,
@@ -82,18 +82,18 @@ describe("european options", () => {
     });
 
     test("futures call option", () => {
-      let vol = futuresEuropeanOptionIV("call", 19, 19, 0.75, 0.1, 1.7011);
+      let vol = futuresEuropeanOptionIV("Call", 19, 19, 0.75, 0.1, 1.7011);
       expect(vol).toBe(0.28);
     });
 
     test("futures put option", () => {
-      let vol = futuresEuropeanOptionIV("put", 19, 19, 0.75, 0.1, 1.7011);
+      let vol = futuresEuropeanOptionIV("Put", 19, 19, 0.75, 0.1, 1.7011);
       expect(vol).toBe(0.28);
     });
 
     test("currency call option", () => {
       let vol = currencyEuropeanOptionIV(
-        "call",
+        "Call",
         1.56,
         1.6,
         0.5,

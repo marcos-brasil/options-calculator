@@ -9,7 +9,7 @@ import {
 
 // section 1.1.1
 export function simpleEuropeanOption(
-  callPutflag: "call" | "put",
+  callPutflag: "Call" | "Put",
   price: number,
   strike: number,
   time: number,
@@ -30,7 +30,7 @@ export function simpleEuropeanOption(
 }
 
 export function simpleEuropeanOptionIV(
-  callPutflag: "call" | "put",
+  callPutflag: "Call" | "Put",
   price: number,
   strike: number,
   time: number,
@@ -54,7 +54,7 @@ export function simpleEuropeanOptionIV(
 
 // section 1.1.2
 export function dividendEuropeanOption(
-  callPutflag: "call" | "put",
+  callPutflag: "Call" | "Put",
   price: number,
   strike: number,
   time: number,
@@ -76,7 +76,7 @@ export function dividendEuropeanOption(
 }
 
 export function dividendEuropeanOptionIV(
-  callPutflag: "call" | "put",
+  callPutflag: "Call" | "Put",
   price: number,
   strike: number,
   time: number,
@@ -101,7 +101,7 @@ export function dividendEuropeanOptionIV(
 
 // section 1.1.3
 export function futuresEuropeanOption(
-  callPutflag: "call" | "put",
+  callPutflag: "Call" | "Put",
   exchangeRate: number,
   strike: number,
   time: number,
@@ -121,7 +121,7 @@ export function futuresEuropeanOption(
 }
 
 export function futuresEuropeanOptionIV(
-  callPutflag: "call" | "put",
+  callPutflag: "Call" | "Put",
   exchangeRate: number,
   strike: number,
   time: number,
@@ -144,7 +144,7 @@ export function futuresEuropeanOptionIV(
 
 // section 1.1.5
 export function currencyEuropeanOption(
-  callPutflag: "call" | "put",
+  callPutflag: "Call" | "Put",
   price: number,
   strike: number,
   time: number,
@@ -166,7 +166,7 @@ export function currencyEuropeanOption(
 }
 
 export function currencyEuropeanOptionIV(
-  callPutflag: "call" | "put",
+  callPutflag: "Call" | "Put",
   price: number,
   strike: number,
   time: number,
