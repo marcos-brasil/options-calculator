@@ -42,6 +42,9 @@ export default function FormFields() {
     resolver: yupResolver(optionsSchema),
   });
 
+  console.log('errors', errors)
+
+
   let onSubmit = async () => {
     let res = await postForm("/api/calculator", {
       method: "POST",
@@ -76,10 +79,10 @@ export default function FormFields() {
 
   let formSubmit = handleSubmit(onSubmit);
 
-  useEffect(() => {
-    onSubmit();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   onSubmit();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <form className={styles.formContainer}>
