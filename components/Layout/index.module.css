@@ -1,9 +1,10 @@
 .container {
   @apply flex flex-col items-center h-screen ;
-  @apply min-w-[400px] min-h-[900px] sm:min-h-[850px];
+  @apply min-w-[400px] h-[1040px] xs:h-[920px];
 }
 
 .content {
   @apply flex  items-center mt-10 py-10 px-4;
-  @apply sm:px-10 h-full w-full min-h-[100px] md:max-w-3xl
+  @apply xs:px-10 h-fit w-full md:max-w-3xl;
+  
 }
