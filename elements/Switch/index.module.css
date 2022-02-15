@@ -1,5 +1,27 @@
-.switchText {
-  @apply pl-2 text-lg w-[50px];
+.switchTextVisible {
+  @apply pl-2 text-lg w-[50px] opacity-100;
+  animation: fadeIn  0.3s;
+}
+
+.switchTextVisibleTransparent {
+  @apply pl-2 text-lg w-[50px] opacity-0;
+  animation: fadeOut  0.3s;
+  
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0}
+  100% { opacity: 1}
+}
+
+@keyframes fadeOut {
+  0% {opacity: 1}
+  100% {opacity: 0}
+}
+
+.switchTextTransparent {
+  @apply transition-opacity text-opacity-0 ease-in-out duration-300;
+  @apply pl-2 text-lg w-[50px] text-transparent delay-150;
 }
 
 .toggle {

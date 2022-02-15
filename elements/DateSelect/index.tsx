@@ -63,6 +63,7 @@ export default function DateSelect({
         <input
           {...register}
           aria-label="expiration date"
+          aria-hidden="true"
           className="fixed w-0 h-0"
           value={inputValue}
           // checked={true}

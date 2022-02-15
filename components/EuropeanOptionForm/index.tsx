@@ -31,8 +31,6 @@ export default function FormFields() {
 
   let optionState = useAppSelector((state) => state.option);
 
-  let legend = <div className={styles.switchText}>{optionState.kind}</div>;
-
   const {
     register,
     handleSubmit,
@@ -42,8 +40,7 @@ export default function FormFields() {
     resolver: yupResolver(optionsSchema),
   });
 
-  console.log('errors', errors)
-
+  console.log("errors", errors);
 
   let onSubmit = async () => {
     let res = await postForm("/api/calculator", {
@@ -88,10 +85,12 @@ export default function FormFields() {
     <form className={styles.formContainer}>
       <div className={styles.switchContainer}>
         <Switch
+          greeLegend="Call"
+          redLegend="Put"
           register={formRegisters.kind}
           isChecked={optionState.kind === "Put"}
           id={optionState.kind}
-          legend={legend}
+          // legend={legend}
           onClick={(e) => {
             let kind = optionState.kind === "Call" ? "Put" : "Call";
             dispatch(updateKind(kind));
