@@ -14,8 +14,46 @@ export default function Calculator() {
         European Options Calculator
       </h1>
 
-      <div className="flex flex-col items-center w-full h-full p-2 ">
+      <div className=" w-full h-full p-2 ">
         <EuropeanFormFields />
+        <div className="w-[220px] mt-4 pl-4 h-[140px] overflow-auto">
+          <table className="w-full border border-gray-400">
+            <caption className=" font-bold text-left pl-2">
+              Vanila Greeks
+            </caption>
+
+            <tbody className="border border-gray-400">
+              <tr className="border border-gray-400">
+                <td className="border border-gray-400 w-[50px] text-right pr-2">AA</td>
+                <td className="pl-2">BB</td>
+              </tr>
+              <tr>
+                <td>AA</td>
+              </tr>
+              <tr>
+                <td>AA</td>
+              </tr>
+              <tr>
+                <td>AA</td>
+              </tr>
+              <tr>
+                <td>AA</td>
+              </tr>
+              <tr>
+                <td>AA</td>
+              </tr>
+              <tr>
+                <td>AA</td>
+              </tr>
+              <tr>
+                <td>AA</td>
+              </tr>
+              <tr>
+                <td>AA</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
