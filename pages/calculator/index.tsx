@@ -19,7 +19,7 @@ export default function Calculator() {
 
       <div className=" w-full h-full p-2 ">
         <EuropeanFormFields />
-        <div className="flex  overflow-auto gap-2">
+        <div className="flex  overflow-auto gap-6">
           <StatsTable
             title="Vanila Greeks"
             data={[
