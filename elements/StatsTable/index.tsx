@@ -7,6 +7,8 @@ type Props = {
 
 export default function StatsTable({ title, data }: Props) {
   return (
+    // <div className="flex min-w-fit items-center bg-stone-300">
+
     <div className={styles.container}>
       <div className={styles.titleContent}>{title}</div>
       <div className={styles.tableContainer}>
@@ -39,5 +41,7 @@ export default function StatsTable({ title, data }: Props) {
         </table>
       </div>
     </div>
+    // </div>
+
   );
 }

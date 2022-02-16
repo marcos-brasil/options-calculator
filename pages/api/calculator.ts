@@ -71,7 +71,7 @@ export default function handler(
 
   res.status(200).json({
     "Vanila Greeks": [
-      { legend: "Implied Volatility", value: (volatility * 100).toFixed(2) },
+      { legend: "Implied Volatility", value: (volatility * 100).toFixed(2) + '%' },
       { legend: "Delta", value: "-" },
       { legend: "Gamma", value: "-" },
       { legend: "Theta", value: "-" },

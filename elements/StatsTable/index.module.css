@@ -1,9 +1,11 @@
 .container {
-  @apply flex bg-stone-300 rounded-lg   flex-col min-w-fit pb-4 pt-4 ;
+  @apply flex bg-stone-300 rounded-lg  items-center flex-col;
+  @apply  min-w-fit pb-4 pt-4 shadow-lg;
 }
 
 .titleContent {
   @apply z-10 font-bold text-left pl-6 pb-1 bg-stone-300;
+  @apply border-b-2 border-gray-400 mb-4 w-5/6 ;
 }
 
 .tableContainer {
@@ -19,7 +21,7 @@
 }
 
 .leftText {
-  @apply pl-2 text-left w-14;
+  @apply pl-2 text-left w-20;
 }
 
 .rightLastCell {

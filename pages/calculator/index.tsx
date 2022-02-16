@@ -25,7 +25,7 @@ export default function Calculator() {
 
         <div className=" w-full h-full p-2 ">
           <EuropeanFormFields />
-          <div className="flex  overflow-auto gap-6 pt-6 mx-4">
+          <div className="flex  overflow-auto gap-6 pt-6 pb-4 mx-4">
             {entries.map(([title, data], idx) => {
               return <StatsTable key={idx} title={title} data={data} />;
             })}
