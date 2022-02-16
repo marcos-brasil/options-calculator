@@ -3,11 +3,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { roundNumber } from "../../lib";
 
 import {
-  currencyEuropeanOption,
-  dividendEuropeanOption,
-  futuresEuropeanOption,
-  simpleEuropeanOption,
-  simpleEuropeanOptionIV,
+  currencyOptionPrice,
+  dividendOptionPrice,
+  futuresOptionPrice,
+  vanillaOptionPrice,
+  vanillaOptionIV,
 } from "../../lib/european-options/options-formulas";
 
 import { OptionsGreek } from "../../lib/options-greek-types";
@@ -59,7 +59,7 @@ export default function handler(
     4
   );
 
-  let volatility = simpleEuropeanOptionIV(
+  let volatility = vanillaOptionIV(
     kind,
     Number(assetPrice),
     Number(strikePrice),

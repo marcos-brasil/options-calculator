@@ -6,6 +6,30 @@ import { roundNumber } from "../index";
 
 import { cnd } from "../distributions";
 
+export function variableD1(
+  price: number,
+  strike: number,
+  time: number,
+  volatility: number,
+  carry: number
+) {
+  return (
+    (Math.log(price / strike) + (carry + volatility ** 2 / 2) * time) /
+    (volatility * Math.sqrt(time))
+  );
+}
+
+export function variableD2 (
+  price: number,
+  strike: number,
+  time: number,
+  volatility: number,
+  carry: number
+) {
+  let d1 = variableD1(price, strike, time, volatility, carry)
+  return d1 - volatility * Math.sqrt(time)
+}
+
 // section 1.1.6
 export function generalBlackScholes(
   callPutflag: "Call" | "Put",
@@ -16,23 +40,20 @@ export function generalBlackScholes(
   volatility: number,
   carry: number
 ) {
-  let d1 =
-    (Math.log(price / strike) + (carry + volatility ** 2 / 2) * time) /
-    (volatility * Math.sqrt(time));
-
-  let d2 = d1 - volatility * Math.sqrt(time);
+  let d1 = variableD1(price, strike, time, volatility, carry)
+  let d2 =variableD2(price, strike, time, volatility, carry)
 
   if (callPutflag === "Call") {
     return (
-      price * Math.E ** ((carry - rate) * time) * cnd(d1) -
-      strike * Math.E ** (-rate * time) * cnd(d2)
+      price * Math.exp((carry - rate) * time) * cnd(d1) -
+      strike * Math.exp(-rate * time) * cnd(d2)
     );
   }
 
   // put
   return (
-    strike * Math.E ** (-rate * time) * cnd(-d2) -
-    price * Math.E ** ((carry - rate) * time) * cnd(-d1)
+    strike * Math.exp(-rate * time) * cnd(-d2) -
+    price * Math.exp((carry - rate) * time) * cnd(-d1)
   );
 }
 
@@ -64,7 +85,6 @@ export function generalBlackScholesIV(
   while (true) {
     let vol = 2 ** idx / 1000;
     idx++;
-
 
     let guessPrice = generalBlackScholes(
       callPutflag,

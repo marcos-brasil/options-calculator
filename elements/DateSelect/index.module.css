@@ -5,6 +5,7 @@
   @apply bg-gray-100 outline-none px-2 pr-6 rounded-md appearance-none;
 
   @apply text-sm text-gray-600 shadow-md h-[25px];
+  
 }
 
 /* .button {
