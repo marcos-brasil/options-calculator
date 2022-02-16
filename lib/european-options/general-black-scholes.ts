@@ -82,8 +82,10 @@ export function generalBlackScholesIV(
   let upperBound = Infinity;
 
   let idx = 0;
+  let counter = 0
   while (true) {
-    let vol = 2 ** idx / 1000;
+    counter++
+    let vol =( 2 ** idx  -1);
     idx++;
 
     let guessPrice = generalBlackScholes(
@@ -96,7 +98,9 @@ export function generalBlackScholesIV(
       carry
     );
 
-    guessPrice = roundNumber(guessPrice, precision);
+    // console.log(1, counter, [lowerBound, upperBound,], [guessPrice, optionPrice], vol)
+
+    // guessPrice = roundNumber(guessPrice, precision);
 
     if (guessPrice < optionPrice) {
       lowerBound = vol;
@@ -109,7 +113,17 @@ export function generalBlackScholesIV(
     }
   }
 
+    // console.log(2, counter, [lowerBound, upperBound])
+
+
   while (true) {
+    counter++
+    // console.log(3, counter, [lowerBound, upperBound])
+
+    if (lowerBound === upperBound) {
+      return 0
+    }
+
     let vol = lowerBound + (upperBound - lowerBound) / 2;
 
     let guessPrice = generalBlackScholes(

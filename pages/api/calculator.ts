@@ -8,6 +8,7 @@ import {
   futuresOptionPrice,
   vanillaOptionPrice,
   vanillaOptionIV,
+  vanillaDelta,
 } from "../../lib/european-options/options-formulas";
 
 import { OptionsGreek } from "../../lib/options-greek-types";
@@ -68,11 +69,24 @@ export default function handler(
     Number(optionPrice)
   );
 
+  let delta = vanillaDelta(
+    kind,
+    Number(assetPrice),
+    Number(strikePrice),
+    time,
+    Number(interestRate),
+    Number(optionPrice)
+  );
+
+  console.log('---', delta)
 
   res.status(200).json({
     "Vanila Greeks": [
-      { legend: "Implied Volatility", value: (volatility * 100).toFixed(2) + '%' },
-      { legend: "Delta", value: "-" },
+      {
+        legend: "Implied Volatility",
+        value: (volatility * 100).toFixed(2) + "%",
+      },
+      { legend: "Delta", value: (delta * 100).toFixed(2) },
       { legend: "Gamma", value: "-" },
       { legend: "Theta", value: "-" },
       { legend: "Vega", value: "-" },
@@ -83,7 +97,7 @@ export default function handler(
       { legend: "Touch the Strike", value: "-" },
     ],
     "Delta Greeks": [
-      { legend: "Delta", value: "-" },
+      { legend: "Delta", value: (delta * 100).toFixed(2) },
       { legend: "DdeltaDvol", value: "-" },
       { legend: "DvannaDvol", value: "-" },
       { legend: "DdeltaDtime", value: "-" },
@@ -117,6 +131,7 @@ export default function handler(
   console.log("calculator api");
   // res.status(200).json({ name: "John Doe" });
 }
+
 
 // "Rho Greeks": [
 //   { legend: "Implied Volatility", value: "-" },

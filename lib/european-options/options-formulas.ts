@@ -52,5 +52,6 @@ export const commodityOptionIV = commodityIV(generalBlackScholesIV);
 // Delta
 //
 
+export const vanillaDelta = vanilla(gDelta)
 export const futuresDelta = futures(gDelta);
 export const commoditiesDelta = commodity(gDelta);
